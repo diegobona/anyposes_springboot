@@ -125,8 +125,9 @@
     <div class="panelscroll">
         <!-- <p>[操作提示]◎旋转:空白处按住鼠标左键拖动 ◎缩放:鼠标滚轮</p>   -->
         <h2>设置</h2>
+        <p>人物风格</p>
         <div>
-            <select id="modelswitch" name="" style="font-size: 16px">
+            <select id="modelswitch" name="人物风格" style="font-size: 16px">
                 <option value="male" selected = "selected">简洁风格-男</option>
                 <option value="female">简洁风格-女</option>
                 <option value="child">简洁风格-小孩</option>
@@ -160,13 +161,11 @@
                     <button class="setposebtn" data-posecode="7"><span class="btntext">蹲</span></button>
                     <button class="setposebtn" data-posecode="8"><span class="btntext">推</span></button>
                     <button class="setposebtn" data-posecode="9"><span class="btntext">拉</span></button>
-
-
-                    <button class="setposebtn" data-posecode="21"><span class="btntext">坐姿-正常</span></button>
-                    <button class="setposebtn" data-posecode="22"><span class="btntext">坐姿-翘腿</span></button>
-
                     <button class="setposebtn" data-posecode="27"><span class="btntext">趴</span></button>
                     <button class="setposebtn" data-posecode="28"><span class="btntext">睡觉</span></button>
+<!--                    <button class="setposebtn" data-posecode="74"><span class="btntext">躺1</span></button>-->
+                    <button class="setposebtn" data-posecode="75"><span class="btntext">躺</span></button>
+                    <button class="setposebtn" data-posecode="66"><span class="btntext">挖掘</span></button>
                 </div>
             </details>
             <details open="">
@@ -174,30 +173,45 @@
                 <div class="flexbtnwrap">
                     <button class="setposebtn" data-posecode="10"><span class="btntext">慢跑</span></button>
                     <button class="setposebtn" data-posecode="11"><span class="btntext">快跑</span></button>
-                    <button class="setposebtn" data-posecode="12"><span class="btntext">芭蕾舞</span></button>
+                    <button class="setposebtn" data-posecode="12"><span class="btntext">芭蕾舞1</span></button>
+                    <button class="setposebtn" data-posecode="53"><span class="btntext">芭蕾舞2</span></button>
+                    <button class="setposebtn" data-posecode="54"><span class="btntext">芭蕾舞3</span></button>
                     <button class="setposebtn" data-posecode="13"><span class="btntext">跳水</span></button>
                     <button class="setposebtn" data-posecode="14"><span class="btntext">踢足球</span></button>
-                    <button class="setposebtn" data-posecode="15"><span class="btntext">篮球运球</span></button>
-                    <button class="setposebtn" data-posecode="16"><span class="btntext">扣篮</span></button>
-                    <button class="setposebtn" data-posecode="17"><span class="btntext">骑车</span></button>
+                    <button class="setposebtn" data-posecode="56"><span class="btntext">守门</span></button>
+                    <button class="setposebtn" data-posecode="15"><span class="btntext">篮球运球</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"篮球"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="16"><span class="btntext">扣篮</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"篮球"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="57"><span class="btntext">篮球跳投</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"篮球"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="17"><span class="btntext">骑车</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"自行车"使用效果最佳</div><span class="presetinfopointer"></span></button>
                     <button class="setposebtn" data-posecode="18"><span class="btntext">冲浪</span></button>
                     <button class="setposebtn" data-posecode="29"><span class="btntext">掷东西</span></button>
-                    <button class="setposebtn" data-posecode="30"><span class="btntext">发球</span></button>
+                    <button class="setposebtn" data-posecode="30"><span class="btntext">发球</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"小球"及"网球拍(右手)"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="51"><span class="btntext">网球正手击球</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"小球"及"网球拍(右手)"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="52"><span class="btntext">网球反手击球</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"小球"及"网球拍(右手)"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="55"><span class="btntext">吊杆</span></button>
                     <button class="setposebtn" data-posecode="31"><span class="btntext">引体向上</span></button>
+                    <button class="setposebtn" data-posecode="60"><span class="btntext">倒立</span></button>
+                    <button class="setposebtn" data-posecode="61"><span class="btntext">肘形支架</span></button>
 
                 </div>
             </details>
             <details open="">
                 <summary>打斗</summary>
                 <div class="flexbtnwrap">
-                    <button class="setposebtn" data-posecode="19"><span class="btntext">射击</span></button>
+                    <button class="setposebtn" data-posecode="19"><span class="btntext">射击1</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"枪"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="62"><span class="btntext">射击2</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"枪"使用效果最佳</div><span class="presetinfopointer"></span></button>
                     <button class="setposebtn" data-posecode="20"><span class="btntext">高踢腿</span></button>
+                    <button class="setposebtn" data-posecode="63"><span class="btntext">空手道踢腿</span></button>
                     <button class="setposebtn" data-posecode="32"><span class="btntext">右勾拳</span></button>
                     <button class="setposebtn" data-posecode="33"><span class="btntext">上勾拳</span></button>
                     <button class="setposebtn" data-posecode="34"><span class="btntext">左刺拳</span></button>
-                    <button class="setposebtn" data-posecode="35"><span class="btntext">剑-直刺</span></button>
-                    <button class="setposebtn" data-posecode="36"><span class="btntext">剑-劈砍</span></button>
-                    <button class="setposebtn" data-posecode="37"><span class="btntext">剑-斜击</span></button>
+                    <button class="setposebtn" data-posecode="35"><span class="btntext">剑-直刺</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"剑(右手)"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="36"><span class="btntext">剑-劈砍</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"剑"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="37"><span class="btntext">剑-斜击</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"剑"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="64"><span class="btntext">剑-侧击</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"剑"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="65"><span class="btntext">用剑阻挡</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"剑"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="58"><span class="btntext">跪着射箭</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"弓"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="59"><span class="btntext">空中射箭</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"弓"使用效果最佳</div><span class="presetinfopointer"></span></button>
                 </div>
             </details>
             <details open="">
@@ -218,8 +232,56 @@
                     <button class="setposebtn" data-posecode="24"><span class="btntext">高兴</span></button>
                     <button class="setposebtn" data-posecode="25"><span class="btntext">激动</span></button>
                     <button class="setposebtn" data-posecode="26"><span class="btntext">惊喜</span></button>
+                    <button class="setposebtn" data-posecode="85"><span class="btntext">厌恶</span></button>
                 </div>
             </details>
+            <details open="">
+                <summary>健身<img src="imgs/information-outline.svg" class="presetinfoicon" style="top:0px"><div class="presetinfo">搭配人物风格"肌肉男"使用效果最佳</div></summary>
+                <div class="flexbtnwrap">
+                    <button class="setposebtn" data-posecode="44"><span class="btntext">健身姿势1</span></button>
+                    <button class="setposebtn" data-posecode="45"><span class="btntext">健身姿势2</span></button>
+                    <button class="setposebtn" data-posecode="46"><span class="btntext">健身姿势3</span></button>
+                    <button class="setposebtn" data-posecode="47"><span class="btntext">健身姿势4</span></button>
+                    <button class="setposebtn" data-posecode="48"><span class="btntext">健身姿势5</span></button>
+                    <button class="setposebtn" data-posecode="49"><span class="btntext">健身姿势6</span></button>
+                    <button class="setposebtn" data-posecode="50"><span class="btntext">健身姿势7</span></button>
+                </div>
+            </details>
+            <details open="">
+                <summary>坐姿</summary>
+                <div class="flexbtnwrap">
+                    <button class="setposebtn" data-posecode="21"><span class="btntext">坐姿1</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"椅子"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="22"><span class="btntext">坐姿2</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"椅子"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="67"><span class="btntext">坐姿3</span></button>
+                    <button class="setposebtn" data-posecode="68"><span class="btntext">坐姿4</span></button>
+                    <button class="setposebtn" data-posecode="69"><span class="btntext">坐姿5</span></button>
+                    <button class="setposebtn" data-posecode="70"><span class="btntext">坐姿6</span></button>
+<!--                    <button class="setposebtn" data-posecode="71"><span class="btntext">坐姿7</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="72"><span class="btntext">坐姿8</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="73"><span class="btntext">坐姿9</span></button>-->
+                </div>
+            </details>
+<!--            <details open="">-->
+<!--                <summary>瑜伽</summary>-->
+<!--                <div class="flexbtnwrap">-->
+<!--                    <button class="setposebtn" data-posecode="76"><span class="btntext">瑜伽姿势1</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="77"><span class="btntext">瑜伽姿势2</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="78"><span class="btntext">瑜伽姿势3</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="79"><span class="btntext">瑜伽姿势4</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="80"><span class="btntext">瑜伽姿势5</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="81"><span class="btntext">瑜伽姿势6</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="82"><span class="btntext">瑜伽姿势7</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="83"><span class="btntext">瑜伽姿势8</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="84"><span class="btntext">瑜伽姿势9</span></button>-->
+<!--                </div>-->
+<!--            </details>-->
+
+
+
+
+
+
+
             <!--					<details open="">-->
             <!--						<summary>坐</summary>-->
             <!--						<div class="flexbtnwrap"></div>-->

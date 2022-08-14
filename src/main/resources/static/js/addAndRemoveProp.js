@@ -548,9 +548,9 @@ $("#toggle-bike").change(function() {
         );//网格模型对象
         ak47mesh.castShadow = true;
         ak47mesh.scale.set(17,17,17);
-        ak47mesh.position.x=0;
-        ak47mesh.position.y=0;
-        ak47mesh.position.z=0;
+        ak47mesh.position.x=-1;
+        ak47mesh.position.y=1;
+        ak47mesh.position.z=-0.5;
         
      
         ak47mesh.rotateZ(-Math.PI/2);
@@ -598,9 +598,12 @@ $("#toggle-ak47").change(function() {
         );//网格模型对象
         lswordmesh.castShadow = true;
         lswordmesh.scale.set(19,19,19);
-        lswordmesh.position.x=-0.5;
-        lswordmesh.position.y=0;
-        lswordmesh.position.z=-22;
+        // lswordmesh.position.x=-0.5;
+        // lswordmesh.position.y=0;
+        // lswordmesh.position.z=-22;
+         lswordmesh.position.x=-1;
+         lswordmesh.position.y=1;
+         lswordmesh.position.z=-22.5;
 
         lswordmesh.rotateZ(-Math.PI/2);
     
@@ -621,11 +624,12 @@ $("#toggle-ak47").change(function() {
         );//网格模型对象
         rswordmesh.castShadow = true;
         rswordmesh.scale.set(19,19,19);
-        rswordmesh.position.x=-0.5;
-        rswordmesh.position.y=0;
-        rswordmesh.position.z=-22;
+        rswordmesh.position.x=-1;
+        rswordmesh.position.y=1;
+        rswordmesh.position.z=22.5;
 
-        rswordmesh.rotateZ(-Math.PI/2);
+        rswordmesh.rotateX(-Math.PI);
+         rswordmesh.rotateZ(-Math.PI/2);
     
         scene.add (rswordmesh);//网格模型添加到场景中
         joint.attach(rswordmesh);
@@ -659,7 +663,7 @@ $("#toggle-sword-l").change(function() {
 $("#toggle-sword-r").change(function() {  
     if(this.checked) {
 
-        let rswordmesh=addSwordR(model.r_fingers); 
+        let rswordmesh=addSwordR(model.r_fingers);
         console.log("MESH checked");
         
     } else { 
@@ -686,11 +690,11 @@ function addBowL(joint){
         );//网格模型对象
         lbowmesh.castShadow = true;
         lbowmesh.scale.set(5,5,5);
-        lbowmesh.position.x=-5.8;
-        lbowmesh.position.y=0;
+        lbowmesh.position.x=0;
+        lbowmesh.position.y=6;
         lbowmesh.position.z=0;
 
-        lbowmesh.rotateZ(Math.PI/2);
+        lbowmesh.rotateZ(-Math.PI/15);
 
         scene.add (lbowmesh);//网格模型添加到场景中
         joint.attach(lbowmesh);
@@ -798,8 +802,11 @@ function addRacketR(joint){
         );//网格模型对象
         rracketmesh.castShadow = true;
         rracketmesh.scale.set(1/8,1/8,1/8);
-        rracketmesh.position.x=-0.5;
-        rracketmesh.position.y=0;
+        // rracketmesh.position.x=-0.5;
+        // rracketmesh.position.y=0;
+        // rracketmesh.position.z=-2;
+        rracketmesh.position.x=-0.8;
+        rracketmesh.position.y=0.8;
         rracketmesh.position.z=-2;
 
         // rracketmesh.rotateX(Math.PI);
