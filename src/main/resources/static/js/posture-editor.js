@@ -35,18 +35,19 @@ for(var i = scene.children.length - 1; i >= 0; i--){
 } 
 
 
-
+//reload是解决切换后之前的模型还在scene中，但如果直接reload，选型会默认回到male，所以要缓存起来，后面再读出来
+//所以切换时可以看到选项会先回到male，但很快恢复为实际选的
 $("#modelswitch").on('change', function() {
                localStorage.setItem('modelswitch', $('option:selected', this).index());
                //clearScene();
                location.reload();
 
-            });
+});
 
 
 if (localStorage.getItem('modelswitch')) {
                 $("#modelswitch option").eq(localStorage.getItem('modelswitch')).prop('selected', true);
-            }
+}
 
 //var model = new Male();
 

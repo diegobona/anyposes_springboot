@@ -51,34 +51,34 @@ public class poseDetailPage {
     @RequestMapping("pose-bike")
     public String bike(){ return "../static/bike";}
 
-    @RequestMapping("pose-boat-pose")
-    public String boatpose(){
-        return "../static/boat-pose";
+    @RequestMapping("pose-bodybuilding-1")
+    public String bodybuilding1(){
+        return "../static/bodybuilding1";
     }
 
-    @RequestMapping("pose-bound-ankle-pose")
-    public String boundanklepose(){
-        return "../static/bound-ankle-pose";
+    @RequestMapping("pose-bodybuilding-2")
+    public String bodybuilding2(){
+        return "../static/bodybuilding2";
     }
 
-    @RequestMapping("pose-bow-pose")
-    public String bowpose(){
-        return "../static/bow-pose";
+    @RequestMapping("pose-bodybuilding-3")
+    public String bodybuilding3(){
+        return "../static/bodybuilding3";
     }
 
-    @RequestMapping("pose-bridge-pose")
-    public String bridgepose(){
-        return "../static/bridge-pose";
+    @RequestMapping("pose-bodybuilding-4")
+    public String bodybuilding4(){
+        return "../static/bodybuilding4";
     }
 
-    @RequestMapping("pose-camel-pose")
-    public String camelpose(){
-        return "../static/camel-pose";
+    @RequestMapping("pose-bodybuilding-5")
+    public String bodybuilding5(){
+        return "../static/bodybuilding5";
     }
 
     @RequestMapping("pose-cartwheel")
     public String cartwheel(){
-        return "../static/cartwheel";
+        return "starwar";
     }
 
     @RequestMapping("pose-celebratory")
@@ -86,24 +86,19 @@ public class poseDetailPage {
         return "../static/celebratory";
     }
 
-    @RequestMapping("pose-chair-pose")
-    public String chairpose(){
-        return "../static/chair-pose";
+    @RequestMapping("pose-bodybuilding-6")
+    public String bodybuilding6(){
+        return "../static/bodybuilding6";
     }
 
-    @RequestMapping("pose-corpse-pose")
-    public String corpsepose(){
-        return "../static/corpse-pose";
+    @RequestMapping("pose-bodybuilding-7")
+    public String bodybuilding7(){
+        return "../static/bodybuilding7";
     }
 
     @RequestMapping("pose-crossed-arms")
     public String crossedarms(){
         return "../static/crossed-arms";
-    }
-
-    @RequestMapping("pose-crow-pose")
-    public String crowpose(){
-        return "../static/crow-pose";
     }
 
     @RequestMapping("pose-digging")
@@ -116,14 +111,14 @@ public class poseDetailPage {
         return "../static/dive";
     }
 
-    @RequestMapping("pose-dolphin-pose")
-    public String dolphinpose(){
-        return "../static/dolphin-pose";
+    @RequestMapping("pose-disgusted")
+    public String disgusted(){
+        return "../static/disgusted";
     }
 
     @RequestMapping("pose-downward-facing-dog")
     public String downwardfacingdog(){
-        return "../static/downward-facing-dog";
+        return "wonderwoman";
     }
 
     @RequestMapping("pose-elbow-stand")
@@ -143,7 +138,7 @@ public class poseDetailPage {
 
     @RequestMapping("pose-forearm-stand")
     public String forearmstand(){
-        return "../static/forearm-stand";
+        return "superman";
     }
 
     @RequestMapping("pose-goalkeeping")
@@ -259,6 +254,51 @@ public class poseDetailPage {
     @RequestMapping("pose-sword-sideblow")
     public String swordsideblow(){
         return "../static/sword-sideblow";
+    }
+
+    @RequestMapping("pose-matrix")
+    public String matrix(){
+        return "../static/matrix";
+    }
+
+    @RequestMapping("pose-titanic")
+    public String titanic(){
+        return "../static/titanic";
+    }
+
+    @RequestMapping("pose-harrypotter")
+    public String harrypotter(){
+        return "../static/harrypotter";
+    }
+
+    @RequestMapping("pose-starwar")
+    public String starwar(){
+        return "../static/starwar";
+    }
+
+    @RequestMapping("pose-superman")
+    public String superman(){
+        return "../static/superman";
+    }
+
+    @RequestMapping("pose-wonderwoman")
+    public String wonderwoman(){
+        return "../static/wonderwoman";
+    }
+
+    @RequestMapping("pose-tennis-forehand")
+    public String tennisforehand(){
+        return "../static/tennis-forehand";
+    }
+
+    @RequestMapping("pose-tennis-backhand")
+    public String tennisbackhand(){
+        return "../static/tennis-backhand";
+    }
+
+    @RequestMapping("pose-tennis-serve")
+    public String serve(){
+        return "../static/tennis-serve";
     }
 
 
