@@ -101,6 +101,12 @@
             <div class="controlhintinner"><b>下载保存</b><br><i></i></div>
         </div>
     </div>
+<!--    <div class="control">-->
+<!--        <label class="movebtn cachesave"><input id="cachesave" type="button"><span>cachesave</span></label>-->
+<!--        <div class="controlhint">-->
+<!--            <div class="controlhintinner"><b>暂存场景</b><br><i></i></div>-->
+<!--        </div>-->
+<!--    </div>-->
     <div class="controlshint">
         <div class="controlshintinner">
             选择其中一个模式，然后手动调整人物姿势
@@ -306,37 +312,37 @@
                 </tr>
                 <tr>
                     <!-- <button id="teststickButton">测试木棒</button> -->
-                    <td class="tablelabel">木棒</td>
+                    <td class="tablelabel">▍木棒</td>
                     <td class="left"><input id="toggle-stick-l" type="checkbox" class="toggle checkbox"><label for="toggle-stick-l"><span></span></label></td>
                     <td><input id="toggle-stick-r" type="checkbox" class="toggle checkbox"><label for="toggle-stick-r"><span></span></label></td>
                 </tr>
                 <tr>
-                    <td class="tablelabel">篮球</td>
+                    <td class="tablelabel">▍篮球</td>
                     <td class="left"><input id="toggle-basketball-l" type="checkbox" class="toggle checkbox"><label for="toggle-basketball-l"><span></span></label></td>
                     <td><input id="toggle-basketball-r" type="checkbox" class="toggle checkbox"><label for="toggle-basketball-r"><span></span></label></td>
                 </tr>
                 <tr>
-                    <td class="tablelabel">小球</td>
+                    <td class="tablelabel">▍小球</td>
                     <td class="left"><input id="toggle-smallball-l" type="checkbox" class="toggle checkbox"><label for="toggle-smallball-l"><span></span></label></td>
                     <td><input id="toggle-smallball-r" type="checkbox" class="toggle checkbox"><label for="toggle-smallball-r"><span></span></label></td>
                 </tr>
                 <tr>
-                    <td class="tablelabel">网球拍</td>
+                    <td class="tablelabel">▍网球拍</td>
                     <td class="left"><input id="toggle-racket-l" type="checkbox" class="toggle checkbox"><label for="toggle-racket-l"><span></span></label></td>
                     <td><input id="toggle-racket-r" type="checkbox" class="toggle checkbox"><label for="toggle-racket-r"><span></span></label></td>
                 </tr>
                 <tr>
-                    <td class="tablelabel">剑</td>
+                    <td class="tablelabel">▍剑</td>
                     <td class="left"><input id="toggle-sword-l" type="checkbox" class="toggle checkbox"><label for="toggle-sword-l"><span></span></label></td>
                     <td><input id="toggle-sword-r" type="checkbox" class="toggle checkbox"><label for="toggle-sword-r"><span></span></label></td>
                 </tr>
                 <tr>
-                    <td class="tablelabel" id="bow">弓</td>
+                    <td class="tablelabel" id="bow">▍弓</td>
                     <td class="left"><input id="toggle-bow-l" type="checkbox" class="toggle checkbox"><label for="toggle-bow-l"><span style="font-size:12px"></span></label></td>
                     <td><input id="toggle-bow-r" type="checkbox" class="toggle checkbox"><label for="toggle-bow-r"><span></span></label></td>
                 </tr>
                 <tr>
-                    <td class="tablelabel" id="ak47">枪<img src="imgs/information-outline.svg" class="presetinfoicon"></td>
+                    <td class="tablelabel" id="ak47">▍枪<img src="imgs/information-outline.svg" class="presetinfoicon"></td>
                     <td class="left"><input id="toggle-ak47" type="checkbox" class="toggle checkbox"><label for="toggle-ak47"><span style="font-size:12px"></span></label></td>
                     <!-- <td><input id="toggle-basketball-r" type="checkbox" class="toggle checkbox"><label for="toggle-basketball-r"><span></span></label></td> -->
                 </tr>
@@ -359,33 +365,47 @@
                 </tr>
 
                 <tr>
-                    <td class="tablelabel" id="chairs">椅子<img src="imgs/information-outline.svg" class="presetinfoicon"></td>
+                    <td class="tablelabel" id="chairs">▍椅子<img src="imgs/information-outline.svg" class="presetinfoicon"></td>
                     <td class="left">&nbsp<input id="toggle-chair" type="checkbox" class="toggle checkbox"><label for="toggle-chair"><span style="font-size:12px"></span></label></td>
                 </tr>
-                <!--							<tr>-->
-                <!--								<td class="left" style="width:33%">-->
-                <!--									<label for="chairwidth">宽</label>-->
-                <!--									<input id="chairwidth" type="range" min="0.1" max="10" step="0.9" value="1"><input class="sizerangenr" type="text" value="1" disabled="">-->
-                <!--								</td>-->
-                <!--								<td class="left" style="width:33%">-->
-                <!--									<label for="chairhigh">高</label>-->
-                <!--									<input id="chairhigh" type="range" min="0.1" max="10" step="0.9" value="1"><input class="sizerangenr" type="text" value="1" disabled="">-->
-                <!--								</td>-->
-                <!--								<td class="left" style="width:33%">-->
-                <!--									<label for="chairdepth">深</label>-->
-                <!--									<input id="chairdepth" type="range" min="0.1" max="10" step="0.9" value="1"><input class="sizerangenr" type="text" value="1" disabled="">-->
-                <!--								</td>-->
-                <!--							</tr>-->
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="chairrotationx">前后旋转</label>
+                        <input id="chairrotationx" type="range" min="0" max="360" step="45" value="270"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="chairrotationy">左右旋转</label>
+                        <input id="chairrotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="chairrotationz">水平旋转</label>
+                        <input id="chairrotationz" type="range" min="0" max="360" step="45" value="90"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
 
                 <tr>
-                    <td class="tablelabel" id="bikes">自行车<img src="imgs/information-outline.svg" class="presetinfoicon"></td>
+                    <td class="tablelabel" id="bikes">▍自行车<img src="imgs/information-outline.svg" class="presetinfoicon"></td>
                     <td class="left">&nbsp<input id="toggle-bike" type="checkbox" class="toggle checkbox"><label for="toggle-bike"><span style="font-size:12px"></span></label></td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="bikerotationx">前后旋转</label>
+                        <input id="bikerotationx" type="range" min="0" max="360" step="45" value="270"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="bikerotationy">左右旋转</label>
+                        <input id="bikerotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="bikerotationz">水平旋转</label>
+                        <input id="bikerotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
                 </tr>
 
 
 
                 <tr>
-                    <td class="tablelabel" id="cubes">方体</td>
+                    <td class="tablelabel" id="cubes">▍方体</td>
                     <td class="left"><input id="toggle-cube" type="checkbox" class="toggle checkbox">
                         <label for="toggle-cube">
 										<span style="font-size:12px">
@@ -396,16 +416,30 @@
                 </tr>
                 <tr style="font-size: 11px;font-weight: 200;">
                     <td class="left" style="width:33%">
-                        <label for="cubewidth">宽</label>
+                        <label for="cubewidth">宽&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
                         <input id="cubewidth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
                     </td>
                     <td class="left" style="width:33%">
-                        <label for="cubehigh">高</label>
+                        <label for="cubehigh">高&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
                         <input id="cubehigh" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
                     </td>
                     <td class="left" style="width:33%">
-                        <label for="cubedepth">深</label>
+                        <label for="cubedepth">深&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
                         <input id="cubedepth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="cuberotationx">前后旋转</label>
+                        <input id="cuberotationx" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="cuberotationy">水平旋转</label>
+                        <input id="cuberotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="cuberotationz">左右旋转</label>
+                        <input id="cuberotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
                     </td>
                 </tr>
 
@@ -416,68 +450,93 @@
                 <!--							</tr>-->
 
                 <tr>
-                    <td class="tablelabel" id="cylinders">圆柱体</td>
+                    <td class="tablelabel" id="cylinders">▍圆柱体</td>
                     <td class="left">&nbsp<input id="toggle-cylinder" type="checkbox" class="toggle checkbox"><label for="toggle-cylinder"><span style="font-size:12px"></span></label></td>
                 </tr>
                 <tr style="font-size: 11px;font-weight: 200;">
                     <td class="left" style="width:33%">
-                        <label for="cylinderwidth">宽</label>
+                        <label for="cylinderwidth">宽&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
                         <input id="cylinderwidth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
                     </td>
                     <td class="left" style="width:33%">
-                        <label for="cylinderhigh">高</label>
+                        <label for="cylinderhigh">高&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
                         <input id="cylinderhigh" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
                     </td>
                     <td class="left" style="width:33%">
-                        <label for="cylinderdepth">深</label>
+                        <label for="cylinderdepth">深&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
                         <input id="cylinderdepth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
                     </td>
                 </tr>
-
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="cylinderrotationx">前后旋转</label>
+                        <input id="cylinderrotationx" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="cylinderrotationy">水平旋转</label>
+                        <input id="cylinderrotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="cylinderrotationz">左右旋转</label>
+                        <input id="cylinderrotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
 
 
 
 
 
                 <tr>
-                    <td class="tablelabel" id="spheres">球体</td>
+                    <td class="tablelabel" id="spheres">▍球体</td>
                     <td class="left">&nbsp<input id="toggle-sphere" type="checkbox" class="toggle checkbox"><label for="toggle-sphere"><span style="font-size:12px"></span></label></td>
                 </tr>
                 <tr style="font-size: 11px;font-weight: 200;">
                     <td class="left" style="width:33%">
-                        <label for="spherewidth">宽</label>
+                        <label for="spherewidth">宽&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
                         <input id="spherewidth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
                     </td>
                     <td class="left" style="width:33%">
-                        <label for="spherehigh">高</label>
+                        <label for="spherehigh">高&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
                         <input id="spherehigh" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
                     </td>
                     <td class="left" style="width:33%">
-                        <label for="spheredepth">深</label>
+                        <label for="spheredepth">深&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
                         <input id="spheredepth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
                     </td>
                 </tr>
 
 
 
-
-
                 <tr>
-                    <td class="tablelabel" id="cones">圆锥体</td>
+                    <td class="tablelabel" id="cones">▍圆锥体</td>
                     <td class="left">&nbsp<input id="toggle-cone" type="checkbox" class="toggle checkbox"><label for="toggle-cone"><span style="font-size:12px"></span></label></td>
                 </tr>
                 <tr style="font-size: 11px;font-weight: 200;">
                     <td class="left" style="width:33%">
-                        <label for="conewidth">宽</label>
+                        <label for="conewidth">宽&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
                         <input id="conewidth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
                     </td>
                     <td class="left" style="width:33%">
-                        <label for="conehigh">高</label>
+                        <label for="conehigh">高&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
                         <input id="conehigh" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
                     </td>
                     <td class="left" style="width:33%">
-                        <label for="conedepth">深</label>
+                        <label for="conedepth">深&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
                         <input id="conedepth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="conerotationx">前后旋转</label>
+                        <input id="conerotationx" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="conerotationy">水平旋转</label>
+                        <input id="conerotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="conerotationz">左右旋转</label>
+                        <input id="conerotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
                     </td>
                 </tr>
 
@@ -526,7 +585,9 @@
             <input id="toggle-floor" type="checkbox" class="toggle checkbox" checked="">
             <label for="toggle-floor"><span>显示地板</span></label><br>
             <input id="toggle-shadow" type="checkbox" class="toggle checkbox" checked="">
-            <label for="toggle-shadow"><span>显示阴影</span></label><br><br>
+            <label for="toggle-shadow"><span>显示阴影</span></label><br>
+            <input id="toggle-lightHelper" type="checkbox" class="toggle checkbox">
+            <label for="toggle-lightHelper" style=""><span>显示光源</span></label><br>
             <input id="backcolor" type="color" value="#F7F7F7">
             <label for="backcolor"><span>背景颜色</span></label><br><br>
             <label for="resrange">人物分辨率</label><br>
@@ -538,7 +599,7 @@
             <label for="lightpositionx">光源位置-X(值越大，光源越往右)</label><br>
             <input id="lightpositionx" type="range" min="-100" max="100" step="1" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
             <label for="lightpositiony">光源位置-Y(值越大，光源越往上)</label><br>
-            <input id="lightpositiony" type="range" min="0" max="100" step="1" value="100"><input class="sizerangenr" type="text" value="100" disabled="">
+            <input id="lightpositiony" type="range" min="0" max="100" step="1" value="50"><input class="sizerangenr" type="text" value="50" disabled="">
             <label for="lightpositionz">光源位置-Z(值越大，光源越往外)</label><br>
             <input id="lightpositionz" type="range" min="-100" max="100" step="1" value="50"><input class="sizerangenr" type="text" value="50" disabled="">
         </details>
@@ -603,103 +664,64 @@
 
 
 
+    <!--		js的引入顺序不要乱动！有先后关系要求的，会出问题：-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.lazy.min.js"></script>
+    <script src="js/jquery.hotkeys.js"></script>
+    <script src="js/bluebird.js"></script>
+    <script src="js/html2canvas.min.js"></script>
+    <script src="js/addAndRemoveProp.js"></script>
+    <script src="js/customModelReplace.js"></script>
+    <script src="js/posture-editor.js"></script>
+    <script src="js/js.js"></script>
+
+
+    <script src="js/tooltip.js"></script>
+    <script src="js/screenshot.js"></script>
+    <script src="js/moveprops.js"></script>
+    <script src="js/scaleprops.js"></script>
+    <script src="js/rotateprops.js"></script>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $('#chairs').tooltip({text: '搭配"坐姿"使用效果最佳',fontSize: '14px',
+                theme: 'light',
+                fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
+                delay: 400});
+            $('#bikes').tooltip({text: '搭配"骑车"姿势使用效果最佳',fontSize: '14px',
+                theme: 'light',
+                fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
+                delay: 400});
+            $('#ak47').tooltip({text: '搭配"射击"姿势使用效果最佳',fontSize: '14px',
+                theme: 'light',
+                fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
+                delay: 400});
+            $('#operatetips').tooltip({text: '◎鼠标左键移动：旋转整个场景<br>◎鼠标右键移动：移动整个场景<br>' +
+                    '◎鼠标右键拖拽"独立道具"：移动道具',
+                fontSize: '14px',
+                textAlign:screenLeft,
+                theme: 'light',
+                fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
+                delay: 200});
+
+
+            init();
+
+        });
+
+        $("#closecontrolshint2").click(function(){
+            $(".controlshint2").hide();
+
+        });
+
+    </script>
+
 
 </body>
 
-<!--		js的引入顺序不要乱动！有先后关系要求的，会出问题：-->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.lazy.min.js"></script>
-<script src="js/jquery.hotkeys.js"></script>
-<script src="js/bluebird.js"></script>
-<script src="js/html2canvas.min.js"></script>
-<script src="js/addAndRemoveProp.js"></script>
-<script src="js/customModelReplace.js"></script>
-<script src="js/posture-editor.js"></script>
-<script src="js/js.js"></script>
 
 
-<script src="js/tooltip.js"></script>
-<script src="js/screenshot.js"></script>
-<script src="js/moveprops.js"></script>
-<script src="js/scaleprops.js"></script>
-
-
-
-
-<script type="text/javascript">
-
-    $(document).ready(function(){
-        $('#chairs').tooltip({text: '搭配"坐姿"使用效果最佳',fontSize: '14px',
-            theme: 'light',
-            fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
-            delay: 400});
-        $('#bikes').tooltip({text: '搭配"骑车"姿势使用效果最佳',fontSize: '14px',
-            theme: 'light',
-            fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
-            delay: 400});
-        $('#ak47').tooltip({text: '搭配"射击"姿势使用效果最佳',fontSize: '14px',
-            theme: 'light',
-            fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
-            delay: 400});
-        $('#operatetips').tooltip({text: '◎鼠标左键移动：旋转整个场景<br>◎鼠标右键移动：移动整个场景<br>' +
-                '◎鼠标右键拖拽"独立道具"：移动道具',
-            fontSize: '14px',
-            textAlign:screenLeft,
-            theme: 'light',
-            fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
-            delay: 200});
-
-
-        init();
-
-    });
-
-
-    $("#closecontrolshint2").click(function(){
-        $(".controlshint2").hide();
-
-    });
-
-
-
-
-    // //获取鼠标move时按下键的编号：
-    // 			$(function() {
-    // 				var leftButtonDown = false;
-    // 				$(document).mousedown(function(e){
-    // // Left mouse button was pressed, set flag
-    // 					if(e.which === 1) leftButtonDown = true;
-    // 				});
-    //
-    // 				$(document).mouseup(function(e){
-    // // Left mouse button was released, clear flag
-    // 					if(e.which === 1) leftButtonDown = false;
-    // 				});
-    //
-    // 				function tweakMouseMoveEvent(e){
-    // // Check from jQuery UI for IE versions < 9
-    // 					if ( !e.button) {
-    // 						leftButtonDown = false;
-    // 					}
-    //
-    // // If left button is not set, set which to 0
-    //
-    // // This indicates no buttons pressed
-    //
-    // 					if(e.which === 1 && !leftButtonDown)    e.which = 0;
-    // 				}
-    //
-    // 				$(document).mousemove(function(e) {
-    // // Call the tweak function to check for LMB and set correct e.which
-    // 					tweakMouseMoveEvent(e);
-    // 					// $('body').text('which: ' + e.which);
-    // 					console.log("which:"+e.which);
-    //
-    // 				});
-    // 			});
-
-
-
-</script>
 
 </html>

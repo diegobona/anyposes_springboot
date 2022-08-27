@@ -20,8 +20,8 @@ function animateMaleHeadReplace(modelUrl){
         animateMaleHeadMesh.rotateY(-Math.PI/2);
         animateMaleHeadMesh.rotateZ(-Math.PI);
 
-        animateMaleHeadMesh.position.x=model.head.position.x-0.5;
-        animateMaleHeadMesh.position.y=model.head.position.y-0.5;
+        animateMaleHeadMesh.position.x=model.head.position.x-1;
+        animateMaleHeadMesh.position.y=model.head.position.y+0.3;
         animateMaleHeadMesh.position.z=model.head.position.z;
 
 
@@ -82,8 +82,8 @@ function detailMaleHeadReplace(modelUrl){
         detailMaleHeadMesh.rotateY(-Math.PI/2);
         detailMaleHeadMesh.rotateZ(-Math.PI);
 
-        detailMaleHeadMesh.position.x=model.head.position.x-0.5;
-        detailMaleHeadMesh.position.y=model.head.position.y-0.5;
+        detailMaleHeadMesh.position.x=model.head.position.x-1;
+        detailMaleHeadMesh.position.y=model.head.position.y+0.3;
         detailMaleHeadMesh.position.z=model.head.position.z;
 
 
@@ -147,8 +147,8 @@ function animateFemaleHeadReplace(modelUrl){
         animateFemaleHeadMesh.rotateY(-Math.PI/2);
         animateFemaleHeadMesh.rotateZ(-Math.PI);
 
-        animateFemaleHeadMesh.position.x=model.head.position.x-0.5;
-        animateFemaleHeadMesh.position.y=model.head.position.y-0.5;
+        animateFemaleHeadMesh.position.x=model.head.position.x-1;
+        animateFemaleHeadMesh.position.y=model.head.position.y+0.3;
         animateFemaleHeadMesh.position.z=model.head.position.z;
 
 
@@ -175,8 +175,8 @@ function detailFemaleHeadReplace(modelUrl){
         detailFemaleHeadMesh.rotateY(-Math.PI/2);
         detailFemaleHeadMesh.rotateZ(-Math.PI);
 
-        detailFemaleHeadMesh.position.x=model.head.position.x-0.5;
-        detailFemaleHeadMesh.position.y=model.head.position.y-0.5;
+        detailFemaleHeadMesh.position.x=model.head.position.x-1;
+        detailFemaleHeadMesh.position.y=model.head.position.y+0.3;
         detailFemaleHeadMesh.position.z=model.head.position.z;
 
 

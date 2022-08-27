@@ -20,50 +20,67 @@ light.shadow.mapSize.height = light.shadow.mapSize.width;
 light.shadow.radius = 8;
 light.castShadow = true;
 scene.add(light);
+//打开能在场景看见光源位置及辅助线：
+var lightHelper = new THREE.CameraHelper(light.shadow.camera );
+
 
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 
 
-function clearScene() { 
-for(var i = scene.children.length - 1; i >= 0; i--){ 
-    thisobj = scene.children[i]; 
-    if(thisobj.type==="Group"){
-        scene.remove(thisobj);
-     }
-    } 
-} 
 
 
-//reload是解决切换后之前的模型还在scene中，但如果直接reload，选型会默认回到male，所以要缓存起来，后面再读出来
-//所以切换时可以看到选项会先回到male，但很快恢复为实际选的
+function deleteOldModel() {
+	for(let i = 0; i<scene.children.length; i++){
+		thisobj = scene.children[i];
+		console.log(thisobj);
+		if(thisobj.type==="Group"){
+			scene.remove(thisobj);
+		}
+	}
+}
+
+
+
 $("#modelswitch").on('change', function() {
-               localStorage.setItem('modelswitch', $('option:selected', this).index());
-               //clearScene();
-               location.reload();
+
+	//缓存当前下拉选项，因为reload后会恢复默认值
+	localStorage.setItem('modelswitch', $('option:selected', this).index());
+
+	deleteOldModel();
+
+
+	//尝试重新加载posture-editor.js，是加载了，但没用：
+	// $.getScript("js/posture-editor.js");
+
+
+	//reload是解决切换后对新model的操作不生效，相当于重新加载js；但reload后下拉框会回到默认值；所以要把切换后的选项缓存起来，后面再读出来
+	//所以切换时可以看到选项会先回到默认值male，但很快恢复为实际选的
+	location.reload();
 
 });
 
 
+
+//从缓存里获取实际选择的下拉项，并设置为它
 if (localStorage.getItem('modelswitch')) {
-                $("#modelswitch option").eq(localStorage.getItem('modelswitch')).prop('selected', true);
+	$("#modelswitch option").eq(localStorage.getItem('modelswitch')).prop('selected', true);
 }
 
-//var model = new Male();
-
+//根据下拉选项生成新的model。
+//这样就不需要全局初始化model：var model=new Male()
 var options=$("#modelswitch option:selected" );
 switch(options.text())
 {
-    case "简洁风格-男":
-        var model=new Male();
-		// alert("mode has been create")
-        break;
-    case "简洁风格-女":
-        var model=new Female();
-        break;
-    case "简洁风格-小孩":
-        var model=new Child();
-        break;
+	case "简洁风格-男":
+		var model=new Male();
+		break;
+	case "简洁风格-女":
+		var model=new Female();
+		break;
+	case "简洁风格-小孩":
+		var model=new Child();
+		break;
 	case "漫画风格-男(首次加载稍慢)":
 		var model=new Male();
 		animateMaleHeadReplace("js/libs/animatemale-head.stl");
@@ -92,9 +109,8 @@ switch(options.text())
 	case "无人":
 		break;
 }
-//console.log("model="+model.postureString);
-// alert("exc2");
-   
+console.log("currentmodel:")
+console.log(model)
 
 
 model.l_tips = model.l_fingers.tips;
@@ -116,7 +132,7 @@ var gauge = new THREE.Mesh(
 	{
 		color: '#2B2B2B'
 	});
-	
+
 var movemodeldirection = "y";
 var undoarray = [model.postureString];
 
@@ -352,11 +368,12 @@ function onMouseDown(event){
 		raycaster.setFromCamera(mouse, camera);
 
 		var intersects = raycaster.intersectObject(model, true);
-
+		console.log(intersects.length);
+		console.log(intersects[0].object.name);
 		if (intersects.length && (intersects[0].object.name || intersects[0].object.parent.name))
 		{
 			controls.enabled = false;
-
+			console.log(controls.enabled);
 			var name = intersects[0].object.name || intersects[0].object.parent.name;
 
 			if (name == 'neck') name = 'head';
@@ -376,6 +393,7 @@ function onMouseDown(event){
 
 			processCheckBoxes();
 		}
+
 		renderer.setAnimationLoop(drawFrame);
 	}
 }
@@ -427,6 +445,7 @@ function relativeTurn(joint, rotationalAngle, angle){
 		joint[rotationalAngle] = val;
 	}
 	joint.updateMatrix();
+	// console.log("relative turn")
 } // relativeTurn
 
 function kinematic2D(joint, rotationalAngle, angle, ignoreIfPositive){
@@ -521,6 +540,7 @@ function animate(time){
 
 function onMouseMove(event){
 	if (obj) userInput(event);
+
 }
 
 function userInput(event){
@@ -594,4 +614,16 @@ function setPostureStr(string){
 		renderer.render(scene, camera);
 	}
 	console.log("setposture has been excute")
+}
+
+for(let i = 0; i<scene.children.length; i++){
+	thisobj = scene.children[i];
+	console.log(thisobj);
+
+	if(thisobj.type==="Group"){
+		// console.log(thisobj.position.x+","+thisobj.position.y+","+thisobj.position.z);
+		// console.log(thisobj.scale)
+	}
+
+
 }

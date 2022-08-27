@@ -12,6 +12,7 @@ function addCube(){
     cube.position.x =-28;
     cube.position.y =-20;
     cube.position.z =-22;
+    cube.name="fangkuai";
     scene.add(cube);
     renderer.render(scene, camera);
     return cube;

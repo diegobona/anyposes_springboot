@@ -44,63 +44,11 @@
 
 </body>
 
-<!--		js的引入顺序不要乱动！有先后关系要求的，会出问题：-->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.lazy.min.js"></script>
-<script src="js/jquery.hotkeys.js"></script>
-<script src="js/bluebird.js"></script>
-<script src="js/html2canvas.min.js"></script>
-<script src="js/addAndRemoveProp.js"></script>
-<script src="js/customModelReplace.js"></script>
-<script src="js/posture-editor.js"></script>
-<script src="js/js.js"></script>
-
-
-<script src="js/tooltip.js"></script>
-<script src="js/screenshot.js"></script>
-<script src="js/moveprops.js"></script>
-<script src="js/scaleprops.js"></script>
-
-
-
-
 <script type="text/javascript">
 
-    $(document).ready(function(){
-        $('#chairs').tooltip({text: '搭配"坐姿"使用效果最佳',fontSize: '14px',
-            theme: 'light',
-            fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
-            delay: 400});
-        $('#bikes').tooltip({text: '搭配"骑车"姿势使用效果最佳',fontSize: '14px',
-            theme: 'light',
-            fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
-            delay: 400});
-        $('#ak47').tooltip({text: '搭配"射击"姿势使用效果最佳',fontSize: '14px',
-            theme: 'light',
-            fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
-            delay: 400});
-        $('#operatetips').tooltip({text: '◎鼠标左键移动：旋转整个场景<br>◎鼠标右键移动：移动整个场景<br>' +
-                '◎鼠标右键拖拽"独立道具"：移动道具',
-            fontSize: '14px',
-            textAlign:screenLeft,
-            theme: 'light',
-            fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
-            delay: 200});
-
-
-        init();
-
-    });
-
-
-    $("#closecontrolshint2").click(function(){
-        $(".controlshint2").hide();
-
-    });
-
-    window.onload=function(){
+    $(function(){
         setPostureStr(JSON.stringify(postureSwordBlock));
-    }
+    });
 
 </script>
 

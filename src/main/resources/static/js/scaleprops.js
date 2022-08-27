@@ -1,6 +1,7 @@
 
 
 
+
 $("#cubewidth").on("change mousemove", function() {
     $(this).next().val($(this).val());
     cube.scale.x=$("#cubewidth").val();
