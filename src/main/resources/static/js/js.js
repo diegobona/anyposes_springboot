@@ -174,11 +174,22 @@ let postureDaoLiPose={"version":6,"data":[7.9,[-3.4,-89.2,154.5],[0,0,24.9],[0,0
 //85
 let postureYanwu={"version":6,"data":[0,[0,-90,0],[5.2,-12.1,-1.1],[8.8,-19.7,14.4],[9.3,-0.4,-7],[3.6],[-14,-5.9,-1.3],[-5.2,-11.3,5.4],[8.5],[6,6,-0.6],[43.7,-30.4,10.6],[15],[-82.5,0.4,58.3],[10,10],[-1.8,46.3,-7.2],[85],[33.6,-16,0],[10,10]]};
 //86
+let posturePicha={"version":6,"data":[-28.9,[17.9,-90,0],[0,0,19.6],[0.1,10.9,1.4],[-17.1,80,106.5],[0],[-6,-6,-0.6],[0.7,-81,90],[0],[6,6,-0.6],[26.5,-52.7,-7.4],[12.3],[-60.2,0,0],[30.1,10],[-29.9,62.5,-1.7],[12.9],[43,13.9,-23.7],[4,10]]};
 //87
+let postureYingla={"version":6,"data":[-11.1,[71.6,-90,0],[-0.8,-0.3,12.9],[0,0,15.4],[0.3,5.9,134.2],[68.5],[-8.5,-5.4,-9.5],[1.8,-7.6,136],[66.9],[6,6,-3.7],[38.7,-24.1,55.5],[10.1],[-15,49.6,7.1],[90.2,100],[-53.5,28.1,59.1],[8.4],[9.5,-25.3,8.9],[95,100]]};
 //88
+let postureJuzhong={"version":6,"data":[-14.2,[21.6,-90,0],[0,0,3.9],[0,0,21.7],[-2.9,34.8,91.5],[112.4],[-10.9,-4.3,-39],[6.9,-30.5,96.2],[111.7],[1,4.4,-34.8],[-39.7,16.4,-165],[1.6],[-63.6,-6.6,59.4],[76.1,51.9],[42.4,-22.9,-160.9],[-2.8],[67.3,9.5,60.9],[100.4,10]]};
 //89
+let postureGolf={"version":6,"data":[-1.2,[35.6,-90,0],[-0.3,0.1,-1.6],[2.7,-28.3,5.7],[9.3,1.4,41.9],[7.1],[-8.9,-6,0.4],[-7.6,-0.1,44.1],[4.9],[8.5,6,4.4],[-5.9,-13.8,38.1],[0],[-15,0,-55],[120,100],[9.3,13.7,35.4],[3.1],[12.3,7.2,-66.6],[120,100]]};
 //90
-
+let postureGolfHuigan={"version":6,"data":[0,[0,-90,0],[12.1,45,8.2],[0.6,-13.2,4.9],[-3.8,-5.9,1.3],[5.2],[1.6,-6.7,-3.5],[-1.7,21.8,-10.2],[23.8],[2.4,-2.2,40.3],[63.1,72.5,17.4],[139.5],[-23.5,-13.8,-19.9],[109.3,101.9],[-57.7,29,120.3],[96.7],[3.5,-5.5,18.6],[122.7,79.3]]};
+//91
+let postureFuwoSheji={"version":6,"data":[-31.9,[-155.9,-87.4,121.3],[-14.8,-9.8,3.8],[0,0,21.7],[16.8,30.9,-5.8],[0.1],[-6,-6,72.2],[-28.1,-25.3,-5.8],[0.1],[6,6,54.7],[63.3,61.8,92.7],[81.8],[-175.1,-24.7,146.3],[97.7,36],[-50.3,-34.5,87.9],[115.2],[72.9,13.9,-54],[120,99.9]]};
+//92
+let postureJingli={"version":6,"data":[0,[0,-90,0],[0,0,-2],[0,0,5],[-4.8,19.1,-1.8],[0],[3.8,-6,0.4],[2.5,-17.5,-2.3],[0],[0.3,6,0],[6.1,-48,-2.4],[15],[-14,-39.5,-9.7],[10,10],[-51.7,-60.7,51.8],[140.4],[-8.2,67,8.6],[4.8,1.6]]};
+//93
+let postureWashGround={"version":6,"data":[-23,[72.7,-90,0],[-6,-16,10],[-0.3,6.6,5.5],[-10.1,23.2,121],[147.8],[-6.6,1.9,28.1],[3.5,-15.9,121.3],[147.5],[6,6,28.4],[47.3,-4.3,51.5],[56],[-90,16.2,74.9],[50.5,63.9],[-86.2,13.9,101.4],[3],[79.5,0.8,-30.7],[15.6,-3.8]]};
+//94
 
 
 // function postureToStr(posture){
@@ -200,7 +211,9 @@ JSON.stringify(postureGaoTiTui),JSON.stringify(postureSit1),JSON.stringify(postu
     ,JSON.stringify(postureSwordBlock),JSON.stringify(postureDigging),JSON.stringify(postureSit3),JSON.stringify(postureSit4),JSON.stringify(postureSit5)
     ,JSON.stringify(postureSit6),JSON.stringify(postureSit7),JSON.stringify(postureSit8),JSON.stringify(postureSit9),JSON.stringify(postureLying1),JSON.stringify(postureLying2)
     ,JSON.stringify(postureChairPose),JSON.stringify(postureBridgePose),JSON.stringify(postureShuFuJiaoHuaiPose),JSON.stringify(postureJuGongPose),JSON.stringify(postureCamelPose)
-    ,JSON.stringify(postureBoatPose),JSON.stringify(postureWuYaPose),JSON.stringify(postureCartWheelPose),JSON.stringify(postureDaoLiPose),JSON.stringify(postureYanwu)]
+    ,JSON.stringify(postureBoatPose),JSON.stringify(postureWuYaPose),JSON.stringify(postureCartWheelPose),JSON.stringify(postureDaoLiPose),JSON.stringify(postureYanwu)
+    ,JSON.stringify(posturePicha),JSON.stringify(postureYingla),JSON.stringify(postureJuzhong),JSON.stringify(postureGolf),JSON.stringify(postureGolfHuigan),JSON.stringify(postureFuwoSheji)
+    ,JSON.stringify(postureJingli),JSON.stringify(postureWashGround)]
 
 
 
@@ -243,6 +256,13 @@ ground.rotation.x = -Math.PI / 2;
 ground.name="Ground";//设置个名字，用鼠标移动判断时会用到
 scene.add(ground);
 
+
+gridHelper = new THREE.GridHelper( 2000, 100 );
+gridHelper.position.y = -29.5;
+gridHelper.material.opacity = 0.25;
+gridHelper.material.transparent = true;
+gridHelper.name="Grid";
+scene.add( gridHelper );
 
 //显示地面 checkbox状态切换
 $("#toggle-floor").change(function() {

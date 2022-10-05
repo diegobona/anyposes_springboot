@@ -133,4 +133,79 @@ $("#conerotationz").on("change mousemove", function() {
     renderer.render(scene, camera);
 });
 
+//前后旋转
+$("#vaserotationx").on("change mousemove", function() {
+    $(this).next().val($(this).val());
+    vasemesh.rotation.x=THREE.MathUtils.degToRad($("#vaserotationx").val());
+    vasemesh.rotation.y=THREE.MathUtils.degToRad($("#vaserotationy").val());
+    vasemesh.rotation.z=THREE.MathUtils.degToRad($("#vaserotationz").val());
+    renderer.render(scene, camera);
+});
+//水平旋转
+$("#vaserotationy").on("change mousemove", function() {
+    $(this).next().val($(this).val());
+    vasemesh.rotation.x=THREE.MathUtils.degToRad($("#vaserotationx").val());
+    vasemesh.rotation.y=THREE.MathUtils.degToRad($("#vaserotationy").val());
+    vasemesh.rotation.z=THREE.MathUtils.degToRad($("#vaserotationz").val());
+    renderer.render(scene, camera);
+});
+//左右旋转
+$("#vaserotationz").on("change mousemove", function() {
+    $(this).next().val($(this).val());
+    vasemesh.rotation.x=THREE.MathUtils.degToRad($("#vaserotationx").val());
+    vasemesh.rotation.y=THREE.MathUtils.degToRad($("#vaserotationy").val());
+    vasemesh.rotation.z=THREE.MathUtils.degToRad($("#vaserotationz").val());
+    renderer.render(scene, camera);
+});
+
+//前后旋转
+$("#treerotationx").on("change mousemove", function() {
+    $(this).next().val($(this).val());
+    treemesh.rotation.x=THREE.MathUtils.degToRad($("#treerotationx").val());
+    treemesh.rotation.y=THREE.MathUtils.degToRad($("#treerotationy").val());
+    treemesh.rotation.z=THREE.MathUtils.degToRad($("#treerotationz").val());
+    renderer.render(scene, camera);
+});
+//水平旋转
+$("#treerotationy").on("change mousemove", function() {
+    $(this).next().val($(this).val());
+    treemesh.rotation.x=THREE.MathUtils.degToRad($("#treerotationx").val());
+    treemesh.rotation.y=THREE.MathUtils.degToRad($("#treerotationy").val());
+    treemesh.rotation.z=THREE.MathUtils.degToRad($("#treerotationz").val());
+    renderer.render(scene, camera);
+});
+//左右旋转
+$("#treerotationz").on("change mousemove", function() {
+    $(this).next().val($(this).val());
+    treemesh.rotation.x=THREE.MathUtils.degToRad($("#treerotationx").val());
+    treemesh.rotation.y=THREE.MathUtils.degToRad($("#treerotationy").val());
+    treemesh.rotation.z=THREE.MathUtils.degToRad($("#treerotationz").val());
+    renderer.render(scene, camera);
+});
+
+//前后旋转
+$("#truckrotationx").on("change mousemove", function() {
+    $(this).next().val($(this).val());
+    truckmesh.rotation.x=THREE.MathUtils.degToRad($("#truckrotationx").val());
+    truckmesh.rotation.y=THREE.MathUtils.degToRad($("#truckrotationy").val());
+    truckmesh.rotation.z=THREE.MathUtils.degToRad($("#truckrotationz").val());
+    renderer.render(scene, camera);
+});
+//水平旋转
+$("#truckrotationy").on("change mousemove", function() {
+    $(this).next().val($(this).val());
+    truckmesh.rotation.x=THREE.MathUtils.degToRad($("#truckrotationx").val());
+    truckmesh.rotation.y=THREE.MathUtils.degToRad($("#truckrotationy").val());
+    truckmesh.rotation.z=THREE.MathUtils.degToRad($("#truckrotationz").val());
+    renderer.render(scene, camera);
+});
+//左右旋转
+$("#truckrotationz").on("change mousemove", function() {
+    $(this).next().val($(this).val());
+    truckmesh.rotation.x=THREE.MathUtils.degToRad($("#truckrotationx").val());
+    truckmesh.rotation.y=THREE.MathUtils.degToRad($("#truckrotationy").val());
+    truckmesh.rotation.z=THREE.MathUtils.degToRad($("#truckrotationz").val());
+    renderer.render(scene, camera);
+});
+
 

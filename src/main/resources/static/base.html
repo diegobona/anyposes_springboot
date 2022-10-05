@@ -33,7 +33,8 @@
 
 
     <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-    <script>LA.init({id: "JkzqMDwdANzluWnR",ck: "JkzqMDwdANzluWnR"})</script>
+<!--    <script>LA.init({id: "JpjPs6ZP9EbA0AXy",ck: "JpjPs6ZP9EbA0AXy"})</script>-->
+    <script>LA.init({id: "JpjPs6ZP9EbA0AXy",ck: "JpjPs6ZP9EbA0AXy"})</script>
 </head>
 
 <!--首页的body的class不能设为page，否则影响对模型的操作，原因未知：-->
@@ -172,6 +173,8 @@
 <!--                    <button class="setposebtn" data-posecode="74"><span class="btntext">躺1</span></button>-->
                     <button class="setposebtn" data-posecode="75"><span class="btntext">躺</span></button>
                     <button class="setposebtn" data-posecode="66"><span class="btntext">挖掘</span></button>
+                    <button class="setposebtn" data-posecode="92"><span class="btntext">敬礼</span></button>
+                    <button class="setposebtn" data-posecode="93"><span class="btntext">擦洗</span></button>
                 </div>
             </details>
             <details open="">
@@ -198,6 +201,11 @@
                     <button class="setposebtn" data-posecode="31"><span class="btntext">引体向上</span></button>
                     <button class="setposebtn" data-posecode="60"><span class="btntext">倒立</span></button>
                     <button class="setposebtn" data-posecode="61"><span class="btntext">肘形支架</span></button>
+                    <button class="setposebtn" data-posecode="86"><span class="btntext">劈叉</span></button>
+                    <button class="setposebtn" data-posecode="87"><span class="btntext">硬拉</span></button>
+                    <button class="setposebtn" data-posecode="88"><span class="btntext">举重</span></button>
+                    <button class="setposebtn" data-posecode="89"><span class="btntext">高尔夫</span></button>
+                    <button class="setposebtn" data-posecode="90"><span class="btntext">高尔夫挥杆</span></button>
 
                 </div>
             </details>
@@ -206,6 +214,7 @@
                 <div class="flexbtnwrap">
                     <button class="setposebtn" data-posecode="19"><span class="btntext">射击1</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"枪"使用效果最佳</div><span class="presetinfopointer"></span></button>
                     <button class="setposebtn" data-posecode="62"><span class="btntext">射击2</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"枪"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="91"><span class="btntext">射击3</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"枪"使用效果最佳</div><span class="presetinfopointer"></span></button>
                     <button class="setposebtn" data-posecode="20"><span class="btntext">高踢腿</span></button>
                     <button class="setposebtn" data-posecode="63"><span class="btntext">空手道踢腿</span></button>
                     <button class="setposebtn" data-posecode="32"><span class="btntext">右勾拳</span></button>
@@ -364,44 +373,6 @@
                     <th style="">鼠标右键或手指移动</th>
                 </tr>
 
-                <tr>
-                    <td class="tablelabel" id="chairs">▍椅子<img src="imgs/information-outline.svg" class="presetinfoicon"></td>
-                    <td class="left">&nbsp<input id="toggle-chair" type="checkbox" class="toggle checkbox"><label for="toggle-chair"><span style="font-size:12px"></span></label></td>
-                </tr>
-                <tr style="font-size: 11px;font-weight: 200;">
-                    <td class="left" style="width:33%">
-                        <label for="chairrotationx">前后旋转</label>
-                        <input id="chairrotationx" type="range" min="0" max="360" step="45" value="270"><input class="sizerangenr" type="text" value="0" disabled="">
-                    </td>
-                    <td class="left" style="width:33%">
-                        <label for="chairrotationy">左右旋转</label>
-                        <input id="chairrotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
-                    </td>
-                    <td class="left" style="width:33%">
-                        <label for="chairrotationz">水平旋转</label>
-                        <input id="chairrotationz" type="range" min="0" max="360" step="45" value="90"><input class="sizerangenr" type="text" value="0" disabled="">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="tablelabel" id="bikes">▍自行车<img src="imgs/information-outline.svg" class="presetinfoicon"></td>
-                    <td class="left">&nbsp<input id="toggle-bike" type="checkbox" class="toggle checkbox"><label for="toggle-bike"><span style="font-size:12px"></span></label></td>
-                </tr>
-                <tr style="font-size: 11px;font-weight: 200;">
-                    <td class="left" style="width:33%">
-                        <label for="bikerotationx">前后旋转</label>
-                        <input id="bikerotationx" type="range" min="0" max="360" step="45" value="270"><input class="sizerangenr" type="text" value="0" disabled="">
-                    </td>
-                    <td class="left" style="width:33%">
-                        <label for="bikerotationy">左右旋转</label>
-                        <input id="bikerotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
-                    </td>
-                    <td class="left" style="width:33%">
-                        <label for="bikerotationz">水平旋转</label>
-                        <input id="bikerotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
-                    </td>
-                </tr>
-
 
 
                 <tr>
@@ -540,6 +511,115 @@
                     </td>
                 </tr>
 
+                <tr>
+                    <td class="tablelabel" id="vase">▍花瓶</td>
+                    <td class="left">&nbsp<input id="toggle-vase" type="checkbox" class="toggle checkbox"><label for="toggle-vase"><span style="font-size:12px"></span></label></td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="vaserotationx">前后旋转</label>
+                        <input id="vaserotationx" type="range" min="0" max="360" step="45" value="270"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="vaserotationy">左右旋转</label>
+                        <input id="vaserotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="vaserotationz">水平旋转</label>
+                        <input id="vaserotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="tablelabel" id="chairs">▍椅子<img src="imgs/information-outline.svg" class="presetinfoicon"></td>
+                    <td class="left">&nbsp<input id="toggle-chair" type="checkbox" class="toggle checkbox"><label for="toggle-chair"><span style="font-size:12px"></span></label></td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="chairrotationx">前后旋转</label>
+                        <input id="chairrotationx" type="range" min="0" max="360" step="45" value="270"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="chairrotationy">左右旋转</label>
+                        <input id="chairrotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="chairrotationz">水平旋转</label>
+                        <input id="chairrotationz" type="range" min="0" max="360" step="45" value="90"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="tablelabel" id="tree">▍树</td>
+                    <td class="left">&nbsp<input id="toggle-tree" type="checkbox" class="toggle checkbox"><label for="toggle-tree"><span style="font-size:12px"></span></label></td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="treewidth">宽&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="treewidth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="treehigh">高&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="treehigh" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="treedepth">深&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="treedepth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="treerotationx">前后旋转</label>
+                        <input id="treerotationx" type="range" min="0" max="360" step="45" value="270"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="treerotationy">左右旋转</label>
+                        <input id="treerotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="treerotationz">水平旋转</label>
+                        <input id="treerotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="tablelabel" id="bikes">▍自行车<img src="imgs/information-outline.svg" class="presetinfoicon"></td>
+                    <td class="left">&nbsp<input id="toggle-bike" type="checkbox" class="toggle checkbox"><label for="toggle-bike"><span style="font-size:12px"></span></label></td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="bikerotationx">前后旋转</label>
+                        <input id="bikerotationx" type="range" min="0" max="360" step="45" value="270"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="bikerotationy">左右旋转</label>
+                        <input id="bikerotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="bikerotationz">水平旋转</label>
+                        <input id="bikerotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="tablelabel" id="truck">▍卡车</td>
+                    <td class="left">&nbsp<input id="toggle-truck" type="checkbox" class="toggle checkbox"><label for="toggle-truck"><span style="font-size:12px"></span></label></td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="truckrotationx">前后旋转</label>
+                        <input id="truckrotationx" type="range" min="0" max="360" step="45" value="270"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="truckrotationy">左右旋转</label>
+                        <input id="truckrotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="truckrotationz">水平旋转</label>
+                        <input id="truckrotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
 
 
 

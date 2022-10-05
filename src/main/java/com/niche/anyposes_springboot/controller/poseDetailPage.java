@@ -297,9 +297,27 @@ public class poseDetailPage {
     }
 
     @RequestMapping("pose-tennis-serve")
-    public String serve(){
+    public String tennisserve(){
         return "../static/tennis-serve";
     }
 
+    @RequestMapping("pose-golf")
+    public String golf(){
+        return "../static/golf";
+    }
 
+    @RequestMapping("pose-golf-huigan")
+    public String golfHuigan(){
+        return "../static/golf-huigan";
+    }
+
+    @RequestMapping("pose-push")
+    public String push(){
+        return "../static/push";
+    }
+
+    @RequestMapping("pose-pull")
+    public String pull(){
+        return "../static/pull";
+    }
 }

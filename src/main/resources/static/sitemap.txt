@@ -60,3 +60,7 @@ https://www.anyposes.com/pose-sitting-on-ground
 https://www.anyposes.com/pose-sitting-back
 https://www.anyposes.com/pose-sitting-cross-legged
 https://www.anyposes.com/pose-sitting-on-ground-cross
+https://www.anyposes.com/pose-golf
+https://www.anyposes.com/pose-golf-huigan
+https://www.anyposes.com/pose-push
+https://www.anyposes.com/pose-pull

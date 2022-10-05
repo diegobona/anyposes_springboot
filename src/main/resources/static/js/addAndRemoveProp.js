@@ -490,6 +490,142 @@ $("#toggle-chair").change(function() {
     }
 });
 
+
+//加载花瓶3D模型
+function addVase(){
+    stlLoader.load("js/libs/vase.stl", stlMesh); //加载stL完成后执行回调函数stLMesh()
+    function stlMesh(stlGeometry) { //定义回调函数
+       vasemesh=new THREE.Mesh(
+            stlGeometry,
+            new THREE.MeshPhongMaterial({color: 'crimson', shininess: 200})
+        );//网格模型对象
+        vasemesh.castShadow = true;
+        vasemesh.scale.set(4,4,4);
+        vasemesh.position.x=-20;
+        vasemesh.position.y=-40;
+        vasemesh.position.z=-5;
+
+        vasemesh.rotateX(Math.PI/2);
+        vasemesh.rotateZ(-Math.PI/2);
+        vasemesh.rotateX(Math.PI);
+        scene.add (vasemesh);//网格模型添加到场景中
+        renderer.render(scene, camera); //没这一句需要再click一下模型才出来！
+        return vasemesh;
+    }
+
+}
+
+
+$("#toggle-vase").change(function() {
+    if(this.checked) {
+
+        let vasemesh=addVase();
+        //console.log("MESH checked"+mesh.material.color);
+        console.log(scene.children);
+
+    } else {
+        try{
+            //console.log("MESH unchecked"+mesh.material.color);
+            //console.log(scene.children);
+            vasemesh.material.visible=false;//根据console情况，如果此句执行成功，物体不再在children中
+            renderer.render(scene, camera);
+
+        }catch(e){
+            console.log(e.name + ": " + e.message);
+        }
+    }
+});
+
+//加载树3D模型
+function addTree(){
+    stlLoader.load("js/libs/lowpoly_tree.stl", stlMesh); //加载stL完成后执行回调函数stLMesh()
+    function stlMesh(stlGeometry) { //定义回调函数
+        treemesh=new THREE.Mesh(
+            stlGeometry,
+            new THREE.MeshPhongMaterial({color: 'crimson', shininess: 200})
+        );//网格模型对象
+        treemesh.castShadow = true;
+        treemesh.scale.set(14,14,14);
+        treemesh.position.x=-40;
+        treemesh.position.y=-30;
+        treemesh.position.z=-5;
+
+        treemesh.rotateX(Math.PI/2);
+        treemesh.rotateZ(-Math.PI/2);
+        treemesh.rotateX(Math.PI);
+        scene.add (treemesh);//网格模型添加到场景中
+        renderer.render(scene, camera); //没这一句需要再click一下模型才出来！
+        return treemesh;
+    }
+
+}
+
+
+$("#toggle-tree").change(function() {
+    if(this.checked) {
+
+        let treemesh=addTree();
+        //console.log("MESH checked"+mesh.material.color);
+        console.log(scene.children);
+
+    } else {
+        try{
+            //console.log("MESH unchecked"+mesh.material.color);
+            //console.log(scene.children);
+            treemesh.material.visible=false;//根据console情况，如果此句执行成功，物体不再在children中
+            renderer.render(scene, camera);
+
+        }catch(e){
+            console.log(e.name + ": " + e.message);
+        }
+    }
+});
+
+//加载卡车3D模型
+function addTruck(){
+    stlLoader.load("js/libs/truck.stl", stlMesh); //加载stL完成后执行回调函数stLMesh()
+    function stlMesh(stlGeometry) { //定义回调函数
+        truckmesh=new THREE.Mesh(
+            stlGeometry,
+            new THREE.MeshPhongMaterial({color: 'crimson', shininess: 200})
+        );//网格模型对象
+        truckmesh.castShadow = true;
+        truckmesh.scale.set(30,30,30);
+        truckmesh.position.x=-40;
+        truckmesh.position.y=-30;
+        truckmesh.position.z=-5;
+
+        truckmesh.rotateX(Math.PI/2);
+        truckmesh.rotateZ(-Math.PI/2);
+        truckmesh.rotateX(Math.PI);
+        scene.add (truckmesh);//网格模型添加到场景中
+        renderer.render(scene, camera); //没这一句需要再click一下模型才出来！
+        return truckmesh;
+    }
+
+}
+
+
+$("#toggle-truck").change(function() {
+    if(this.checked) {
+
+        let truckmesh=addTruck();
+        //console.log("MESH checked"+mesh.material.color);
+        console.log(scene.children);
+
+    } else {
+        try{
+            //console.log("MESH unchecked"+mesh.material.color);
+            //console.log(scene.children);
+            truckmesh.material.visible=false;//根据console情况，如果此句执行成功，物体不再在children中
+            renderer.render(scene, camera);
+
+        }catch(e){
+            console.log(e.name + ": " + e.message);
+        }
+    }
+});
+
 //加载自行车3D模型
  
  function addBike(){

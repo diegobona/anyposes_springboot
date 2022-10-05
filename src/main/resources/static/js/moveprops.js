@@ -36,7 +36,7 @@ function addEvent() {
                 // 	objCanMove.push(scene.children[i]);
                 // }
                 //地面不允许移动：
-                if(scene.children[i].name!=="Ground"){
+                if(scene.children[i].name!=="Ground" && scene.children[i].name!=="Grid"){
                     objCanMove.push(scene.children[i]);
                 }
             }
@@ -108,7 +108,7 @@ function addEvent() {
                 // 	objCanMove.push(scene.children[i]);
                 // }
                 //地面不允许移动：
-                if(scene.children[i].name!=="Ground"){
+                if(scene.children[i].name!=="Ground" && scene.children[i].name!=="Grid" ){
                     objCanMove.push(scene.children[i]);
                 }
             }

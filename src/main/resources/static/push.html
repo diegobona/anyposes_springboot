@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>魔法人偶-免费的交互式绘画3D人体模型</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- source：5118-关键词—— -->
+  <meta name="keywords" content="画画，procreate绘画，素描，速写，临摹，人体模型，人体素材，人体结构">
+  <!-- source：5118-下拉词—— -->
+  <meta name="description" content="本站是一款3D人体模型软件，提供人体动态绘画素材参考、速写人物临摹图，辅助素描入门等，交互式、可任意调整姿势">
+  <meta name="baidu-site-verification" content="code-5W8pPrtpKA" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="style/style.css">
+  <link rel="stylesheet" type="text/css" href="style/tooltip.css">
+  <link rel="shortcut icon" href="imgs/favicon/logo.png" type="image/x-icon">
+  <!--		<script src="js/libs/three.js"></script>-->
+  <script src="js/libs/three.min.js"></script>
+  <!--		<script src="js/libs/three.min2.js"></script>-->
+
+  <script src="js/libs/OrbitControls.min.js"></script>
+
+  <script src="js/libs/OBJLoader.js"></script>
+  <script src="js/libs/STLLoader.js"></script>
+  <script src="js/baseLoaderScene.js"></script>
+  <script src="js/mannequin.js"></script>
+  <script src="js/libs/stats.min.js"></script>
+  <script src="js/libs/dat.gui.min.js"></script>
+
+  <!--		<script src="js/libs/TrackballControls.js"></script>-->
+  <!--		<script src="js/libs/DragControls.js"></script>-->
+  <!--		<script src="js/libs/TransformControls.js"></script>-->
+
+
+  <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+  <script>LA.init({id: "JpjPs6ZP9EbA0AXy",ck: "JpjPs6ZP9EbA0AXy"})</script>
+</head>
+
+
+
+
+<!--    <body th:replace="common/base :: mybody">-->
+<body th:replace="../static/base :: mybody">
+
+</body>
+
+<script>
+  $(function(){
+    setPostureStr(JSON.stringify(posturePush));
+  });
+</script>
+
+
+
+
+
+</html>
+
+
+

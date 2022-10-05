@@ -80,27 +80,30 @@ $("#spheredepth").on("change mousemove", function() {
 
 
 
-$("#conewidth").on("change mousemove", function() {
+$("#treewidth").on("change mousemove", function() {
     $(this).next().val($(this).val());
-    cone.scale.x=$("#conewidth").val();
-    cone.scale.y=$("#conehigh").val();
-    cone.scale.z=$("#conedepth").val();
+    //1、模型导入加载时就放大了14倍  2、导入模型的xyz和标准xyz方向不一致：
+    treemesh.scale.x=$("#treewidth").val()*14;
+    treemesh.scale.y=$("#treedepth").val()*14;
+    treemesh.scale.z=$("#treehigh").val()*14;
     renderer.render(scene, camera);
 });
-$("#conehigh").on("change mousemove", function() {
+$("#treehigh").on("change mousemove", function() {
     $(this).next().val($(this).val());
-    cone.scale.x=$("#conewidth").val();
-    cone.scale.y=$("#conehigh").val();
-    cone.scale.z=$("#conedepth").val();
+    treemesh.scale.x=$("#treewidth").val()*14;
+    treemesh.scale.y=$("#treedepth").val()*14;
+    treemesh.scale.z=$("#treehigh").val()*14;
     renderer.render(scene, camera);
 });
-$("#conedepth").on("change mousemove", function() {
+$("#treedepth").on("change mousemove", function() {
     $(this).next().val($(this).val());
-    cone.scale.x=$("#conewidth").val();
-    cone.scale.y=$("#conehigh").val();
-    cone.scale.z=$("#conedepth").val();
+    treemesh.scale.x=$("#treewidth").val()*14;
+    treemesh.scale.y=$("#treedepth").val()*14;
+    treemesh.scale.z=$("#treehigh").val()*14;
     renderer.render(scene, camera);
 });
+
+
 
 
 
