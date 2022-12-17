@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!--  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+<!--  <title>魔法人偶-免费的交互式绘画3D人体模型</title>-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--  &lt;!&ndash; source：5118-关键词—— &ndash;&gt;-->
+<!--  <meta name="keywords" content="画画，procreate绘画，素描，速写，临摹，人体模型，人体素材，人体结构">-->
+<!--  &lt;!&ndash; source：5118-下拉词—— &ndash;&gt;-->
+<!--  <meta name="description" content="本站是一款3D人体模型软件，提供人体动态绘画素材参考、速写人物临摹图，辅助素描入门等，交互式、可任意调整姿势">-->
+<!--  <meta name="baidu-site-verification" content="code-5W8pPrtpKA" />-->
+<!--  <meta name="baidu_union_verify" content="fc1f539ad4dbd59b020de7eecf6623f7">-->
+<!--  <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+<!--  <link rel="stylesheet" type="text/css" href="dist/css/bootstrap.min.css" th:href="@{/dist/css/bootstrap.min.css}">-->
+
+<!--  <script src="js/login_reg.js"></script>-->
+  <script th:src="@{/js/login_reg.js}"></script>
+</head>
+
+<aside th:fragment="bookModal">
+  <!-- 登录模态框（Modal） -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;
+          </button>
+          <h4 class="modal-title" id="loginModalLabel">
+            用户登录
+          </h4>
+        </div>
+        <div class="modal-body">
+          <!--登录的form表单-->
+          <form id="loginForm" class="form-horizontal" role="form" action="">
+            <div class="form-group has-feedback">
+              <label class="col-sm-2 control-label">用户名</label>
+              <div class="col-sm-8">
+
+                <input type="text" class="form-control" name="username" placeholder="请输入用户名">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+              </div>
+              <div class="col-sm-3" id="userTip" style="padding-top: 10px;display: none">
+                <label class="alert-danger">用户名不存在</label>
+              </div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="col-sm-2 control-label">密码</label>
+              <div class="col-sm-8">
+                <input type="password" class="form-control" name="password" placeholder="请输入密码">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+              </div>
+              <div class="col-sm-3" id="pwdTip" style="padding-top: 10px;display: none">
+                <label class="alert-danger">密码不正确</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox">请记住我
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+<!--              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+              <input type="button" class="btn btn-primary" value="登录" th:onclick="|login()|">
+            </div>
+          </form>
+          <!--form结束-->
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+  </div>
+  <!-- 注册modal end/.modal -->
+  <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="regModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;
+          </button>
+          <h4 class="modal-title" id="regModalLabel">
+            用户注册
+          </h4>
+        </div>
+        <div class="modal-body">
+          <!--登录的form表单-->
+          <form id="regForm" action="" class="form-horizontal" role="form">
+            <div class="form-group has-feedback">
+              <label class="col-sm-2 control-label">用户名*</label>
+              <div class="col-sm-8">
+                <input type="text" name="username" class="form-control" required th:onblur="|checkUser(this)|">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+              </div>
+              <div id="msg" class="col-sm-3" style="padding-top: 10px; display: none">
+                <label class="alert-danger" id="tip">用户名已存在</label>
+              </div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="col-sm-2 control-label">密码*</label>
+              <div class="col-sm-8">
+                <input type="password" name="password" class="form-control" placeholder="" minlength="3" maxlength="12">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+              </div>
+              <!--<div class="col-sm-3" style="padding-top: 10px;">
+                  <label class="alert-danger">密码不正确</label>
+              </div>-->
+            </div>
+            <div class="form-group has-feedback">
+              <label class="col-sm-2 control-label">确认密码*</label>
+              <div class="col-sm-8">
+                <input type="password" class="form-control" id="lastname2" minlength="3" maxlength="12" placeholder="和上面密码保持一致">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+              </div>
+            </div>
+
+<!--            <div class="form-group has-feedback">-->
+<!--              <label class="col-sm-2 control-label">邮箱</label>-->
+<!--              <div class="col-sm-8">-->
+<!--                <input type="email" name="email" class="form-control" placeholder="">-->
+<!--                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="form-group has-feedback">-->
+<!--              <label class="col-sm-2 control-label">电话</label>-->
+<!--              <div class="col-sm-5">-->
+<!--                <input type="tel" name="phone" class="form-control" placeholder="合法手机格式">-->
+<!--                <span class="glyphicon glyphicon-earphone form-control-feedback"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="form-group has-feedback">-->
+<!--              <label class="col-sm-2 control-label">公司</label>-->
+<!--              <div class="col-sm-5">-->
+<!--                <input type="text" name="company" class="form-control" placeholder="请输入公司地址">-->
+<!--                <span class="glyphicon glyphicon-home form-control-feedback"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+
+            <!--<div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">地址</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" placeholder="请输入收货">
+                    <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                </div>
+            </div>-->
+
+            <div class="modal-footer">
+<!--              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+              <input type="button" class="btn btn-primary" value="注册" th:onclick="|register()|">
+            </div>
+          </form>
+          <!--form结束-->
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+  </div>
+
+  <div class="modal fade" id="member" tabindex="-1" role="dialog" aria-labelledby="regModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;
+          </button>
+        </div>
+        <div style="padding-left:30px">
+          <h2>网站一直亏损，部分功能将只向会员开放，望大家理解！大家提了很多建议，后续会升级，感谢！</h2>
+          <h2>购买会员步骤：</h2>
+          <h3>1.注册</h3>
+          <h3>2.扫下方二维码加微信，<b>29元</b>购买<b>永久</b>会员。(价格远低于竞品；加微信也是便于和大家沟通诉求)</h3>
+          <img src="imgs/mywechat.png" width="256" height="256">
+          <h3>3.登录，会出现“永久会员”标志</h3>
+          <h2 style="padding-left:70px">亲们，给俺们一点持续升级的动力哈</h2>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</aside>
+
+<script>
+  // $( '#regForm' ).bootstrapValidator();
+</script>

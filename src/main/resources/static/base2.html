@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>魔法人偶-免费的交互式绘画3D人体模型</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- source：5118-关键词—— -->
+    <meta name="keywords" content="画画，procreate绘画，素描，速写，临摹，人体模型，人体素材，人体结构">
+    <!-- source：5118-下拉词—— -->
+    <meta name="description" content="本站是一款3D人体模型软件，提供人体动态绘画素材参考、速写人物临摹图，辅助素描入门等，交互式、可任意调整姿势">
+    <meta name="baidu-site-verification" content="code-5W8pPrtpKA" />
+    <meta name="baidu_union_verify" content="fc1f539ad4dbd59b020de7eecf6623f7">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <link rel="stylesheet" type="text/css" href="style/tooltip.css">
+    <link rel="shortcut icon" href="imgs/favicon/logo.png" type="image/x-icon">
+    <!--		<script src="js/libs/three.js"></script>-->
+    <script src="js/libs/three.min.js"></script>
+    <!--		<script src="js/libs/three.min2.js"></script>-->
+
+    <script src="js/libs/OrbitControls.min.js"></script>
+
+    <script src="js/libs/OBJLoader.js"></script>
+    <script src="js/libs/STLLoader.js"></script>
+    <script src="js/baseLoaderScene.js"></script>
+    <script src="js/mannequin.js"></script>
+    <script src="js/libs/stats.min.js"></script>
+    <script src="js/libs/dat.gui.min.js"></script>
+
+    <!--		<script src="js/libs/TrackballControls.js"></script>-->
+    <!--		<script src="js/libs/DragControls.js"></script>-->
+    <!--		<script src="js/libs/TransformControls.js"></script>-->
+
+
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+<!--    <script>LA.init({id: "JpjPs6ZP9EbA0AXy",ck: "JpjPs6ZP9EbA0AXy"})</script>-->
+    <script>LA.init({id: "JpjPs6ZP9EbA0AXy",ck: "JpjPs6ZP9EbA0AXy"})</script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?db2321c9e0fa447af0824281abb4ad7a";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</head>
+
+<!--首页的body的class不能设为page，否则影响对模型的操作，原因未知：-->
+<body th:fragment="mybody">
+
+<div class="header">
+    <div class="menubar">
+        <!--		<a href="https://www.anyposes.com"><img class="headerlogo" src="" alt="SetPose logo"></a>-->
+        <ul class="menutop">
+            <li><a href="/">首页</a></li>
+            <li><a href="poses/index.html">姿势介绍</a></li>
+
+            <li th:if="${session.user == null}">
+                <a href="#" data-toggle="modal" data-target="#loginModal">登录</a>
+            </li>
+            <li th:if="${session.user != null}">
+                <a href="javascript:void(0)" th:text="${session.user.username}">安全退出</a>
+            </li>
+            <li th:if="${session.user != null}">
+                <a href="index.html" th:href="@{/user/logout}">安全退出</a>
+            </li>
+            <li th:if="${session.user == null}">
+                <a href="#" data-toggle="modal" data-target="#register">注册</a>
+            </li>
+        </ul>
+        <!--		<div class="signinbutton">-->
+        <!--			<div class="upgradebuttonwrap">-->
+        <!--				<a href="https://anyposes.com/upgrade" class="homeupgradelink">-->
+        <!--					<div class="upgradebutton">Try Pro for Free</div>-->
+        <!--				</a>-->
+        <!--			</div>-->
+        <!--			<div class="userdropdown">-->
+        <!--				<ul>-->
+        <!--					<li><a href="https://anyposes.com/editprofile">Edit Profile</a></li>-->
+        <!--					<li><a href="https://anyposes.com/scripts/signout" class="signOutButtonMobile">Sign out</a></li>-->
+        <!--				</ul>-->
+        <!--			</div>-->
+        <!--			<a href="https://anyposes.com/scripts/signout" class="signOutButton">Sign out</a>-->
+        <!--			<a href="https://anyposes.com/upgrade" class="homeupgradelink mobileupgrade">-->
+        <!--				<div class="upgradebutton">Upgrade</div>-->
+        <!--			</a>-->
+        <!--		</div>-->
+    </div>
+</div>
+<div class="controls">
+    <div class="control">
+        <label class="movebtn tilt3d"><input id="rot-z" type="checkbox" class="toggle" checked=""><span id="rot-z-name">bend</span></label>
+        <div class="controlhint">
+            <div class="controlhintinner"><b>前后旋转</b><br>举例:点头<i>快捷键:Z</i></div>
+        </div>
+    </div>
+    <div class="control">
+        <label class="movebtn roll3d"><input id="rot-x" type="checkbox" class="toggle"><span id="rot-x-name">tilt</span></label>
+        <div class="controlhint">
+            <div class="controlhintinner"><b>左右倾斜</b><br>举例:侧头<i>快捷键:X</i></div>
+        </div>
+    </div>
+    <div class="control">
+        <label class="movebtn rotate3d"><input id="rot-y" type="checkbox" class="toggle"><span id="rot-y-name">turn</span></label>
+        <div class="controlhint">
+            <div class="controlhintinner"><b>左右旋转</b><br>举例:转头<i>快捷键:Y</i></div>
+        </div>
+    </div>
+    <div class="control">
+        <label class="movebtn move3d"><input id="mov-y" type="checkbox" class="toggle"><span>Move</span></label>
+        <div class="controlhint">
+            <div class="controlhintinner"><b>上下移动</b><br><i>快捷键:M</i></div>
+        </div>
+    </div>
+    <div class="control">
+        <label class="movebtn undo"><input id="undo" type="button"><span>Undo</span></label>
+        <div class="controlhint">
+            <div class="controlhintinner"><b>撤销操作</b><br><i>快捷键:Ctrl + Z</i></div>
+        </div>
+    </div>
+    <div class="control">
+        <label class="movebtn screeshot"><input id="screeshot" type="button"><span>screeshot</span></label>
+        <div class="controlhint">
+            <div class="controlhintinner"><b>下载保存</b><br><i></i></div>
+        </div>
+    </div>
+<!--    <div class="control">-->
+<!--        <label class="movebtn cachesave"><input id="cachesave" type="button"><span>cachesave</span></label>-->
+<!--        <div class="controlhint">-->
+<!--            <div class="controlhintinner"><b>暂存场景</b><br><i></i></div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="controlshint">
+        <div class="controlshintinner">
+            选择其中一个模式，然后手动调整人物姿势
+            <svg id="closecontrolshint" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path>
+            </svg>
+        </div>
+    </div>
+</div>
+<div class="hidepanelbtn">
+    <svg style="width:24px;height:24px;transform:rotate(90deg);" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"></path>
+    </svg>
+</div>
+<div class="panel">
+    <div class="opensettingsbtn">
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"></path>
+        </svg>
+        <div>设置</div>
+    </div>
+    <div class="panelscroll">
+        <!-- <p>[操作提示]◎旋转:空白处按住鼠标左键拖动 ◎缩放:鼠标滚轮</p>   -->
+        <h2>设置</h2>
+        <p>人物风格</p>
+        <div>
+            <select id="modelswitch" name="人物风格" style="font-size: 16px">
+                <option value="male" selected = "selected">简洁风格-男</option>
+                <option value="female">简洁风格-女</option>
+                <option value="child">简洁风格-小孩</option>
+                <option value="animateMale" disabled="disabled">漫画风格-男(首次加载稍慢)</option>
+                <option value="animateFemale">漫画风格-女(首次加载稍慢)</option>
+                <option value="realMale">真实风格-男(首次加载稍慢)</option>
+                <option value="realFemale">真实风格-女(首次加载稍慢)</option>
+                <option value="StrongMan">肌肉男(首次加载稍慢)</option>
+                <option value="noHuman">无人</option>
+
+                <!-- <option disabled="">Detailed model 1 - (SetPose Pro)</option>
+                <option disabled="">Detailed model 2 - (SetPose Pro)</option>-->
+            </select>
+
+        </div>
+        <details class="poselist">
+            <summary>
+                <img style="width:24px;height:24px" src="imgs/human-greeting.svg">
+                <h3>预设姿势</h3>
+            </summary>
+            <details open="">
+                <summary>基本姿势</summary>
+                <div class="flexbtnwrap">
+                    <button class="setposebtn" data-posecode="0"><span class="btntext">恢复初始</span></button>
+                    <button class="setposebtn" data-posecode="1"><span class="btntext">走路</span></button>
+                    <button class="setposebtn" data-posecode="2"><span class="btntext">站立1</span></button>
+                    <button class="setposebtn" data-posecode="3"><span class="btntext">站立2</span></button>
+                    <button class="setposebtn" data-posecode="4"><span class="btntext">向后倒</span></button>
+                    <button class="setposebtn" data-posecode="5"><span class="btntext">交叉双臂</span></button>
+                    <button class="setposebtn" data-posecode="6"><span class="btntext">跪地</span></button>
+                    <button class="setposebtn" data-posecode="7"><span class="btntext">蹲</span></button>
+                    <button class="setposebtn" data-posecode="8"><span class="btntext">推</span></button>
+                    <button class="setposebtn" data-posecode="9"><span class="btntext">拉</span></button>
+                    <button class="setposebtn" data-posecode="27"><span class="btntext">趴</span></button>
+                    <button class="setposebtn" data-posecode="28"><span class="btntext">睡觉</span></button>
+<!--                    <button class="setposebtn" data-posecode="74"><span class="btntext">躺1</span></button>-->
+                    <button class="setposebtn" data-posecode="75"><span class="btntext">躺</span></button>
+                    <button class="setposebtn" data-posecode="66"><span class="btntext">挖掘</span></button>
+                    <button class="setposebtn" data-posecode="92"><span class="btntext">敬礼</span></button>
+                    <button class="setposebtn" data-posecode="93"><span class="btntext">擦洗</span></button>
+                </div>
+            </details>
+            <details open="">
+                <summary>体育</summary>
+                <div class="flexbtnwrap">
+                    <button class="setposebtn" data-posecode="10"><span class="btntext">慢跑</span></button>
+                    <button class="setposebtn" data-posecode="11"><span class="btntext">快跑</span></button>
+                    <button class="setposebtn" data-posecode="12"><span class="btntext">芭蕾舞1</span></button>
+                    <button class="setposebtn" data-posecode="53"><span class="btntext">芭蕾舞2</span></button>
+                    <button class="setposebtn" data-posecode="54"><span class="btntext">芭蕾舞3</span></button>
+                    <button class="setposebtn" data-posecode="13"><span class="btntext">跳水</span></button>
+                    <button class="setposebtn" data-posecode="14"><span class="btntext">踢足球</span></button>
+                    <button class="setposebtn" data-posecode="56"><span class="btntext">守门</span></button>
+                    <button class="setposebtn" data-posecode="15"><span class="btntext">篮球运球</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"篮球"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="16"><span class="btntext">扣篮</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"篮球"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="57"><span class="btntext">篮球跳投</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"篮球"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="17"><span class="btntext">骑车</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"自行车"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="18"><span class="btntext">冲浪</span></button>
+                    <button class="setposebtn" data-posecode="29"><span class="btntext">掷东西</span></button>
+                    <button class="setposebtn" data-posecode="30"><span class="btntext">发球</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"小球"及"网球拍(右手)"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="51"><span class="btntext">网球正手击球</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"小球"及"网球拍(右手)"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="52"><span class="btntext">网球反手击球</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"小球"及"网球拍(右手)"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="55"><span class="btntext">吊杆</span></button>
+                    <button class="setposebtn" data-posecode="31"><span class="btntext">引体向上</span></button>
+                    <button class="setposebtn" data-posecode="60"><span class="btntext">倒立</span></button>
+                    <button class="setposebtn" data-posecode="61"><span class="btntext">肘形支架</span></button>
+                    <button class="setposebtn" data-posecode="86"><span class="btntext">劈叉</span></button>
+                    <button class="setposebtn" data-posecode="87"><span class="btntext">硬拉</span></button>
+                    <button class="setposebtn" data-posecode="88"><span class="btntext">举重</span></button>
+                    <button class="setposebtn" data-posecode="89"><span class="btntext">高尔夫</span></button>
+                    <button class="setposebtn" data-posecode="90"><span class="btntext">高尔夫挥杆</span></button>
+
+                </div>
+            </details>
+            <details open="">
+                <summary>打斗</summary>
+                <div class="flexbtnwrap">
+                    <button class="setposebtn" data-posecode="19"><span class="btntext">射击1</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"枪"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="62"><span class="btntext">射击2</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"枪"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="91"><span class="btntext">射击3</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"枪"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="20"><span class="btntext">高踢腿</span></button>
+                    <button class="setposebtn" data-posecode="63"><span class="btntext">空手道踢腿</span></button>
+                    <button class="setposebtn" data-posecode="32"><span class="btntext">右勾拳</span></button>
+                    <button class="setposebtn" data-posecode="33"><span class="btntext">上勾拳</span></button>
+                    <button class="setposebtn" data-posecode="34"><span class="btntext">左刺拳</span></button>
+                    <button class="setposebtn" data-posecode="35"><span class="btntext">剑-直刺</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"剑(右手)"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="36"><span class="btntext">剑-劈砍</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"剑"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="37"><span class="btntext">剑-斜击</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"剑"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="64"><span class="btntext">剑-侧击</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"剑"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="65"><span class="btntext">用剑阻挡</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"剑"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="58"><span class="btntext">跪着射箭</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"弓"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="59"><span class="btntext">空中射箭</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"弓"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                </div>
+            </details>
+            <details open="">
+                <summary>电影&amp; 电视</summary>
+                <div class="flexbtnwrap">
+                    <button class="setposebtn" data-posecode="38"><span class="btntext">黑客帝国</span></button>
+                    <button class="setposebtn" data-posecode="39"><span class="btntext">泰坦尼克</span></button>
+                    <button class="setposebtn" data-posecode="40"><span class="btntext">哈利波特</span></button>
+                    <button class="setposebtn" data-posecode="41"><span class="btntext">星球大战</span></button>
+                    <button class="setposebtn" data-posecode="42"><span class="btntext">超人</span></button>
+                    <button class="setposebtn" data-posecode="43"><span class="btntext">神奇女侠</span></button>
+                </div>
+            </details>
+            <details open="">
+                <summary>情感</summary>
+                <div class="flexbtnwrap">
+                    <button class="setposebtn" data-posecode="23"><span class="btntext">悲伤</span></button>
+                    <button class="setposebtn" data-posecode="24"><span class="btntext">高兴</span></button>
+                    <button class="setposebtn" data-posecode="25"><span class="btntext">激动</span></button>
+                    <button class="setposebtn" data-posecode="26"><span class="btntext">惊喜</span></button>
+                    <button class="setposebtn" data-posecode="85"><span class="btntext">厌恶</span></button>
+                </div>
+            </details>
+            <details open="">
+                <summary>健身<img src="imgs/information-outline.svg" class="presetinfoicon" style="top:0px"><div class="presetinfo">搭配人物风格"肌肉男"使用效果最佳</div></summary>
+                <div class="flexbtnwrap">
+                    <button class="setposebtn" data-posecode="44"><span class="btntext">健身姿势1</span></button>
+                    <button class="setposebtn" data-posecode="45"><span class="btntext">健身姿势2</span></button>
+                    <button class="setposebtn" data-posecode="46"><span class="btntext">健身姿势3</span></button>
+                    <button class="setposebtn" data-posecode="47"><span class="btntext">健身姿势4</span></button>
+                    <button class="setposebtn" data-posecode="48"><span class="btntext">健身姿势5</span></button>
+                    <button class="setposebtn" data-posecode="49"><span class="btntext">健身姿势6</span></button>
+                    <button class="setposebtn" data-posecode="50"><span class="btntext">健身姿势7</span></button>
+                </div>
+            </details>
+            <details open="">
+                <summary>坐姿</summary>
+                <div class="flexbtnwrap">
+                    <button class="setposebtn" data-posecode="21"><span class="btntext">坐姿1</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"椅子"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="22"><span class="btntext">坐姿2</span><img src="imgs/information-outline.svg" class="presetinfoicon"><div class="presetinfo">搭配道具"椅子"使用效果最佳</div><span class="presetinfopointer"></span></button>
+                    <button class="setposebtn" data-posecode="67"><span class="btntext">坐姿3</span></button>
+                    <button class="setposebtn" data-posecode="68"><span class="btntext">坐姿4</span></button>
+                    <button class="setposebtn" data-posecode="69"><span class="btntext">坐姿5</span></button>
+                    <button class="setposebtn" data-posecode="70"><span class="btntext">坐姿6</span></button>
+<!--                    <button class="setposebtn" data-posecode="71"><span class="btntext">坐姿7</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="72"><span class="btntext">坐姿8</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="73"><span class="btntext">坐姿9</span></button>-->
+                </div>
+            </details>
+<!--            <details open="">-->
+<!--                <summary>瑜伽</summary>-->
+<!--                <div class="flexbtnwrap">-->
+<!--                    <button class="setposebtn" data-posecode="76"><span class="btntext">瑜伽姿势1</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="77"><span class="btntext">瑜伽姿势2</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="78"><span class="btntext">瑜伽姿势3</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="79"><span class="btntext">瑜伽姿势4</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="80"><span class="btntext">瑜伽姿势5</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="81"><span class="btntext">瑜伽姿势6</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="82"><span class="btntext">瑜伽姿势7</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="83"><span class="btntext">瑜伽姿势8</span></button>-->
+<!--                    <button class="setposebtn" data-posecode="84"><span class="btntext">瑜伽姿势9</span></button>-->
+<!--                </div>-->
+<!--            </details>-->
+
+
+
+
+
+
+
+            <!--					<details open="">-->
+            <!--						<summary>坐</summary>-->
+            <!--						<div class="flexbtnwrap"></div>-->
+            <!--					</details>-->
+            <!--					<details open="">-->
+            <!--						<summary>躺</summary>-->
+            <!--						<div class="flexbtnwrap"></div>-->
+            <!--					</details>-->
+        </details>
+
+        <details class="proplist">
+            <summary>
+                <img style="width:24px;height:24px" src="imgs/basketball.svg">
+                <h3>道具</h3>
+            </summary>
+            <table style="width: 100%;">
+                <tbody id="handProp">
+                <tr>
+                    <th>手持道具</th>
+                    <th>左手</th>
+                    <th>右手</th>
+                </tr>
+                <tr>
+                    <!-- <button id="teststickButton">测试木棒</button> -->
+                    <td class="tablelabel">▍木棒</td>
+                    <td class="left"><input id="toggle-stick-l" type="checkbox" class="toggle checkbox"><label for="toggle-stick-l"><span></span></label></td>
+                    <td><input id="toggle-stick-r" type="checkbox" class="toggle checkbox"><label for="toggle-stick-r"><span></span></label></td>
+                </tr>
+                <tr>
+                    <td class="tablelabel">▍篮球</td>
+                    <td class="left"><input id="toggle-basketball-l" type="checkbox" class="toggle checkbox"><label for="toggle-basketball-l"><span></span></label></td>
+                    <td><input id="toggle-basketball-r" type="checkbox" class="toggle checkbox"><label for="toggle-basketball-r"><span></span></label></td>
+                </tr>
+                <tr>
+                    <td class="tablelabel">▍小球</td>
+                    <td class="left"><input id="toggle-smallball-l" type="checkbox" class="toggle checkbox"><label for="toggle-smallball-l"><span></span></label></td>
+                    <td><input id="toggle-smallball-r" type="checkbox" class="toggle checkbox"><label for="toggle-smallball-r"><span></span></label></td>
+                </tr>
+                <tr>
+                    <td class="tablelabel">▍网球拍</td>
+                    <td class="left"><input id="toggle-racket-l" type="checkbox" class="toggle checkbox"><label for="toggle-racket-l"><span></span></label></td>
+                    <td><input id="toggle-racket-r" type="checkbox" class="toggle checkbox"><label for="toggle-racket-r"><span></span></label></td>
+                </tr>
+                <tr>
+                    <td class="tablelabel">▍剑</td>
+                    <td class="left"><input id="toggle-sword-l" type="checkbox" class="toggle checkbox"><label for="toggle-sword-l"><span></span></label></td>
+                    <td><input id="toggle-sword-r" type="checkbox" class="toggle checkbox"><label for="toggle-sword-r"><span></span></label></td>
+                </tr>
+                <tr>
+                    <td class="tablelabel" id="bow">▍弓</td>
+                    <td class="left"><input id="toggle-bow-l" type="checkbox" class="toggle checkbox"><label for="toggle-bow-l"><span style="font-size:12px"></span></label></td>
+                    <td><input id="toggle-bow-r" type="checkbox" class="toggle checkbox"><label for="toggle-bow-r"><span></span></label></td>
+                </tr>
+                <tr>
+                    <td class="tablelabel" id="ak47">▍枪<img src="imgs/information-outline.svg" class="presetinfoicon"></td>
+                    <td class="left"><input id="toggle-ak47" type="checkbox" class="toggle checkbox"><label for="toggle-ak47"><span style="font-size:12px"></span></label></td>
+                    <!-- <td><input id="toggle-basketball-r" type="checkbox" class="toggle checkbox"><label for="toggle-basketball-r"><span></span></label></td> -->
+                </tr>
+
+
+
+                <!-- 						<tr>
+                                                <td class="tablelabel"></td>
+                                                <td class="left"><input type="checkbox" class="toggle checkbox"><label><span></span></label></td>
+                                                <td><input type="checkbox" class="toggle checkbox"><label ><span></span></label></td>
+                                            </tr> -->
+                </tbody>
+            </table>
+            <table style="width: 100%;">
+                <tbody>
+                <tr>
+                    <th>独立道具</th>
+<!--   如果设width属性，会导致下面的滑动条宽度出问题：-->
+                    <th style="">鼠标右键或手指移动</th>
+                </tr>
+
+
+
+                <tr>
+                    <td class="tablelabel" id="cubes">▍方体</td>
+                    <td class="left"><input id="toggle-cube" type="checkbox" class="toggle checkbox">
+                        <label for="toggle-cube">
+										<span style="font-size:12px">
+										</span>
+                        </label>
+                    </td>
+
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="cubewidth">宽&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="cubewidth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="cubehigh">高&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="cubehigh" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="cubedepth">深&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="cubedepth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="cuberotationx">前后旋转</label>
+                        <input id="cuberotationx" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="cuberotationy">水平旋转</label>
+                        <input id="cuberotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="cuberotationz">左右旋转</label>
+                        <input id="cuberotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
+
+
+                <!--							<tr>-->
+                <!--								<td class="tablelabel" id="highcubes">立方柱</td>-->
+                <!--								<td class="left"><input id="toggle-highcube" type="checkbox" class="toggle checkbox"><label for="toggle-highcube"><span style="font-size:12px"></span></label></td>-->
+                <!--							</tr>-->
+
+                <tr>
+                    <td class="tablelabel" id="cylinders">▍圆柱体</td>
+                    <td class="left">&nbsp<input id="toggle-cylinder" type="checkbox" class="toggle checkbox"><label for="toggle-cylinder"><span style="font-size:12px"></span></label></td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="cylinderwidth">宽&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="cylinderwidth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="cylinderhigh">高&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="cylinderhigh" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="cylinderdepth">深&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="cylinderdepth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="cylinderrotationx">前后旋转</label>
+                        <input id="cylinderrotationx" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="cylinderrotationy">水平旋转</label>
+                        <input id="cylinderrotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="cylinderrotationz">左右旋转</label>
+                        <input id="cylinderrotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
+
+
+
+
+
+                <tr>
+                    <td class="tablelabel" id="spheres">▍球体</td>
+                    <td class="left">&nbsp<input id="toggle-sphere" type="checkbox" class="toggle checkbox"><label for="toggle-sphere"><span style="font-size:12px"></span></label></td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="spherewidth">宽&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="spherewidth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="spherehigh">高&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="spherehigh" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="spheredepth">深&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="spheredepth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td class="tablelabel" id="cones">▍圆锥体</td>
+                    <td class="left">&nbsp<input id="toggle-cone" type="checkbox" class="toggle checkbox"><label for="toggle-cone"><span style="font-size:12px"></span></label></td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="conewidth">宽&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="conewidth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="conehigh">高&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="conehigh" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="conedepth">深&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="conedepth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="conerotationx">前后旋转</label>
+                        <input id="conerotationx" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="conerotationy">水平旋转</label>
+                        <input id="conerotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="conerotationz">左右旋转</label>
+                        <input id="conerotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="tablelabel" id="vase">▍花瓶</td>
+                    <td class="left">&nbsp<input id="toggle-vase" type="checkbox" class="toggle checkbox"><label for="toggle-vase"><span style="font-size:12px"></span></label></td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="vaserotationx">前后旋转</label>
+                        <input id="vaserotationx" type="range" min="0" max="360" step="45" value="270"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="vaserotationy">左右旋转</label>
+                        <input id="vaserotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="vaserotationz">水平旋转</label>
+                        <input id="vaserotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="tablelabel" id="chairs">▍椅子<img src="imgs/information-outline.svg" class="presetinfoicon"></td>
+                    <td class="left">&nbsp<input id="toggle-chair" type="checkbox" class="toggle checkbox"><label for="toggle-chair"><span style="font-size:12px"></span></label></td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="chairrotationx">前后旋转</label>
+                        <input id="chairrotationx" type="range" min="0" max="360" step="45" value="270"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="chairrotationy">左右旋转</label>
+                        <input id="chairrotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="chairrotationz">水平旋转</label>
+                        <input id="chairrotationz" type="range" min="0" max="360" step="45" value="90"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="tablelabel" id="tree">▍树</td>
+                    <td class="left">&nbsp<input id="toggle-tree" type="checkbox" class="toggle checkbox"><label for="toggle-tree"><span style="font-size:12px"></span></label></td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="treewidth">宽&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="treewidth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="treehigh">高&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="treehigh" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="treedepth">深&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度</label>
+                        <input id="treedepth" type="range" min="0.5" max="5" step="0.1" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+                    </td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="treerotationx">前后旋转</label>
+                        <input id="treerotationx" type="range" min="0" max="360" step="45" value="270"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="treerotationy">左右旋转</label>
+                        <input id="treerotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="treerotationz">水平旋转</label>
+                        <input id="treerotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="tablelabel" id="bikes">▍自行车<img src="imgs/information-outline.svg" class="presetinfoicon"></td>
+                    <td class="left">&nbsp<input id="toggle-bike" type="checkbox" class="toggle checkbox"><label for="toggle-bike"><span style="font-size:12px"></span></label></td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="bikerotationx">前后旋转</label>
+                        <input id="bikerotationx" type="range" min="0" max="360" step="45" value="270"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="bikerotationy">左右旋转</label>
+                        <input id="bikerotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="bikerotationz">水平旋转</label>
+                        <input id="bikerotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="tablelabel" id="truck">▍卡车</td>
+                    <td class="left">&nbsp<input id="toggle-truck" type="checkbox" class="toggle checkbox"><label for="toggle-truck"><span style="font-size:12px"></span></label></td>
+                </tr>
+                <tr style="font-size: 11px;font-weight: 200;">
+                    <td class="left" style="width:33%">
+                        <label for="truckrotationx">前后旋转</label>
+                        <input id="truckrotationx" type="range" min="0" max="360" step="45" value="270"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="truckrotationy">左右旋转</label>
+                        <input id="truckrotationy" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                    <td class="left" style="width:33%">
+                        <label for="truckrotationz">水平旋转</label>
+                        <input id="truckrotationz" type="range" min="0" max="360" step="45" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+                    </td>
+                </tr>
+
+
+
+
+
+
+                </tbody>
+            </table>
+        </details>
+        <details>
+            <summary>
+                <img style="width:24px;height:24px" src="imgs/human-handsdown.svg">
+                <h3>模型设置</h3>
+            </summary>
+            <div style="display: none;">
+                <input id="inverse-kinematics" type="checkbox" class="toggle checkbox">
+                <label for="inverse-kinematics"><span>Inverse kinematics</span></label><br>
+            </div>
+            <input id="biological-constraints" type="checkbox" class="toggle checkbox" checked="">
+            <label for="biological-constraints"><span>不允许做出不可能的动作</span></label><br><br>
+            <label for="headsizerange">头部大小</label><br>
+            <input id="headsizerange" type="range" min="0.5" max="4" step="0.05" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+            <label for="torsowidthrange">身体宽度</label><br>
+            <input id="torsowidthrange" type="range" min="0.5" max="4" step="0.05" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+            <label for="torsoheightrange">身体长度</label><br>
+            <input id="torsoheightrange" type="range" min="0.5" max="4" step="0.05" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+            <label for="torsosizerange">身体厚度</label><br>
+            <input id="torsosizerange" type="range" min="0.5" max="4" step="0.05" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+            <label for="armlsizerange">左臂尺寸</label><br>
+            <input id="armlsizerange" type="range" min="0.5" max="4" step="0.05" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+            <label for="armrsizerange">右臂尺寸</label><br>
+            <input id="armrsizerange" type="range" min="0.5" max="4" step="0.05" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+            <label for="leglsizerange">左腿尺寸</label><br>
+            <input id="leglsizerange" type="range" min="0.5" max="4" step="0.05" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+            <label for="legrsizerange">右腿尺寸</label>
+            <input id="legrsizerange" type="range" min="0.5" max="4" step="0.05" value="1"><input class="sizerangenr" type="text" value="1" disabled="">
+        </details>
+        <details>
+            <summary>
+                <img style="width:24px;height:24px" src="imgs/video.svg">
+                <h3>光照 &amp; 环境</h3>
+            </summary>
+            <input id="toggle-floor" type="checkbox" class="toggle checkbox" checked="">
+            <label for="toggle-floor"><span>显示地板</span></label><br>
+            <input id="toggle-shadow" type="checkbox" class="toggle checkbox" checked="">
+            <label for="toggle-shadow"><span>显示阴影</span></label><br>
+            <input id="toggle-lightHelper" type="checkbox" class="toggle checkbox">
+            <label for="toggle-lightHelper" style=""><span>显示光源</span></label><br>
+            <input id="backcolor" type="color" value="#F7F7F7">
+            <label for="backcolor"><span>背景颜色</span></label><br><br>
+            <label for="resrange">人物分辨率</label><br>
+            <input id="resrange" type="range" min="0.25" max="3" step="0.25" value="0"><input class="sizerangenr" type="text" value="1x" disabled="">
+            <label for="fovrange">视野大小</label><br>
+            <input id="fovrange" type="range" min="10" max="100" step="1" value="30"><input class="sizerangenr" type="text" value="30" disabled="">
+            <label for="lightrange">光照强度</label><br>
+            <input id="lightrange" type="range" min="0" max="2" step="0.1" value="0.5"><input class="sizerangenr" type="text" value="0.5" disabled="">
+            <label for="lightpositionx">光源位置-X(值越大，光源越往右)</label><br>
+            <input id="lightpositionx" type="range" min="-100" max="100" step="1" value="0"><input class="sizerangenr" type="text" value="0" disabled="">
+            <label for="lightpositiony">光源位置-Y(值越大，光源越往上)</label><br>
+            <input id="lightpositiony" type="range" min="0" max="100" step="1" value="50"><input class="sizerangenr" type="text" value="50" disabled="">
+            <label for="lightpositionz">光源位置-Z(值越大，光源越往外)</label><br>
+            <input id="lightpositionz" type="range" min="-100" max="100" step="1" value="50"><input class="sizerangenr" type="text" value="50" disabled="">
+        </details>
+    </div>
+</div>
+<div class="canvascontainer" id="canvascontainer1"></div>
+
+
+<div class="controlshint2" style="position:fixed; bottom:50px; right:110px; width:100px;height:100px;text-align: center;">
+    <div class="controlshintinner2" style="width:70px;padding-top: 25px;">
+        <a href="https://wj.qq.com/s2/10523910/6f12/" target="_blank" style="color:deepskyblue;">提点建议<br/>&emsp;</a>
+        <svg id="closecontrolshint2" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path>
+        </svg>
+    </div>
+</div>
+
+
+
+<div style="float:left;">
+    <p id="copyright" style="color:#c0c0c0;">© <span style="color:#c0c0c0;">2022-</span>2022 <a href="https://www.anyposes.com" style="color:#c0c0c0;">anyposes.com</a>
+        <span style="color:#c0c0c0;">All rights reserved.</span> <a href="https://beian.miit.gov.cn" style="color:#c0c0c0;" target="_blank" rel="nofollow">皖ICP备2022010624号</a>
+    </p>
+</div>
+
+<div class="infopointer" style="float:left;margin-left:20%">
+    <div>关于本站</div>
+    <svg style="width:24px;height:24px;transform: rotate(180deg);" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"></path>
+    </svg>
+</div>
+<div class="infopointer" style="float: right;font-size:14px;margin-right:10px">
+    <div id="operatetips">简明操作提示</div>
+</div>
+<div class="infopointer" style="float: right;font-size:14px;margin-right:30px">
+    <div class="nextplan"><a href="https://www.wolai.com/6zr1wWpLyTzroK4UmpNvCG" target="_blank" style="">下一步计划</a></div>
+</div>
+
+<div class="about">
+    <div class="aboutsection">
+        <h1 class="header-h1">免费的交互式人体模型，用于素描、速写临摹<br>anyposes——在线人体模型</h1>
+        <p style="font-size:15px">你可能已经画了几次人体，并意识到完全凭记忆来画多么困难。尤其当你是一个初学者，或者你刚开始画更复杂的图形，比如身体的动态姿势。<br>当你画人体时，你必须考虑很多不同的因素，以使结果看起来尽可能真实。骨骼结构、肌肉和其他解剖细节等因素非常重要，但很难把握正确。<br>这就是为什么很多艺术家在画人体时会用到参照物。参照物可以是图像或视频，但问题是它们是不可调整的。例如，当你想画一个特定的姿势时，通常很难找到完全合适的参考素材。<br>这就是可调人物模型派上用场的地方——网页即可操作、完全免费！这样的在线绘画模型是练习画人体或动态姿势的理想工具。<br>只需通过拖动来调整身体部位，并通过屏幕左侧的选择器来沿一个轴旋转或移动它们。<br>如果您不想花时间来创建姿势，您也可以使用屏幕右侧的"预设姿势"(持续更新)，您还可以从众多"道具"(持续更新)中选择一个与模型互动，或者尝试不同的模型(持续更新)，让你的姿势更有趣！</p>
+        <img class="lazy" alt="绘画临摹速写人体模型-芭蕾舞" src="imgs/pose1.png" style="">
+        <p style="font-size:15px"><i>预设姿势-芭蕾舞</i></p>
+        <p style="font-size:15px">使用人体模型，你应该从尝试一些简单的姿势开始，以习惯调整身体部位和使用左侧不同的操作模式。</p>
+        <img class="lazy" alt="绘画临摹速写人体模型-坐姿+椅子" src="imgs/sittingpose.png" style="">
+        <p style="font-size:15px"><i>椅子道具和预设的坐姿</i></p>
+        <p style="font-size:15px">很快你就能熟练掌握这些操作，接下来可以试着给场景添加一些基本的道具。例如，您可以添加椅子，并使用它来创建不同的坐姿。</p>
+        <img class="lazy" alt="绘画临摹速写人体模型-骑自行车" src="imgs/bike.png" style="">
+        <p style="font-size:15px"><i>自行车道具和预设的骑车姿势</i></p>
+        <p style="font-size:15px">你也可以使用更具互动感的道具，比如自行车或枪，来创造更有活力的姿势。 </p>
+        <!--				<img class="lazy" alt="Reference pose model kneeling and holding a red bow" src="https://anyposes.com/imgs/mannequin1.png" style="">-->
+        <!--				<p><i>Bow prop and archery preset</i></p> &ndash;&gt;-->
+        <p style="font-size:15px">"道具"菜单有不同的手持道具可供选择(持续更新)。可以把它们放在模特的左手或右手，你也可以把它们组合起来，让模特每只手都拿着东西。你甚至可以将自行车这样的地面道具与多个手持道具结合起来!</p>
+        <p></p>
+        <p class="oscredit">
+            <!-- SetPose.com uses <a href="https://github.com/mrdoob/three.js" target="_blank" rel="noopener noreferrer">Three.js</a> and <a href="https://github.com/boytchev/mannequin.js" target="_blank" rel="noopener noreferrer">Mannequin.js</a><br>
+            <a href="https://sketchfab.com/3d-models/anime-girl-model-t-pose-base-free-5a1ef64055c748fd94447adbfa5a88a2" target="_blank" rel="noopener noreferrer">Anime model</a> by <a href="https://sketchfab.com/ALexzart" target="_blank" rel="noopener noreferrer">ALexZ art</a> -->
+        </p>
+    </div>
+</div>
+
+<!-- 登录模态框（Modal） -->
+<!-- 注册modal end/.modal -->
+<div th:replace="../static/register_login_modal :: bookModal"></div>
+
+
+    <!--		js的引入顺序不要乱动！有先后关系要求的，会出问题：-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.lazy.min.js"></script>
+    <script src="js/jquery.hotkeys.js"></script>
+    <script src="dist/js/bootstrap.js" th:src="@{/dist/js/bootstrap.js}"></script>
+    <script src="js/bluebird.js"></script>
+    <script src="js/html2canvas.min.js"></script>
+    <script src="js/addAndRemoveProp.js"></script>
+    <script src="js/customModelReplace.js"></script>
+    <script src="js/posture-editor.js"></script>
+    <script src="js/js.js"></script>
+
+
+    <script src="js/tooltip.js"></script>
+    <script src="js/screenshot.js"></script>
+    <script src="js/moveprops.js"></script>
+    <script src="js/scaleprops.js"></script>
+    <script src="js/rotateprops.js"></script>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $('#chairs').tooltip({text: '搭配"坐姿"使用效果最佳',fontSize: '14px',
+                theme: 'light',
+                fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
+                delay: 400});
+            $('#bikes').tooltip({text: '搭配"骑车"姿势使用效果最佳',fontSize: '14px',
+                theme: 'light',
+                fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
+                delay: 400});
+            $('#ak47').tooltip({text: '搭配"射击"姿势使用效果最佳',fontSize: '14px',
+                theme: 'light',
+                fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
+                delay: 400});
+            $('#operatetips').tooltip({text: '◎鼠标左键移动：旋转整个场景<br>◎鼠标右键移动：移动整个场景<br>' +
+                    '◎鼠标右键拖拽"独立道具"：移动道具',
+                fontSize: '14px',
+                textAlign:screenLeft,
+                theme: 'light',
+                fontFamily: "'Open Sans', 'Roboto-Regular', Arial",
+                delay: 200});
+
+
+            init();
+
+        });
+
+        $("#closecontrolshint2").click(function(){
+            $(".controlshint2").hide();
+
+        });
+
+    </script>
+
+
+</body>
+
+
+
+
+</html>

@@ -77,6 +77,30 @@ $("#spheredepth").on("change mousemove", function() {
 });
 
 
+$("#conewidth").on("change mousemove", function() {
+    $(this).next().val($(this).val());
+    cone.scale.x=$("#conewidth").val();
+    cone.scale.y=$("#conehigh").val();
+    cone.scale.z=$("#conedepth").val();
+    renderer.render(scene, camera);
+});
+$("#conehigh").on("change mousemove", function() {
+    $(this).next().val($(this).val());
+    cone.scale.x=$("#conewidth").val();
+    cone.scale.y=$("#conehigh").val();
+    cone.scale.z=$("#conedepth").val();
+    renderer.render(scene, camera);
+});
+$("#conedepth").on("change mousemove", function() {
+    $(this).next().val($(this).val());
+    cone.scale.x=$("#conewidth").val();
+    cone.scale.y=$("#conehigh").val();
+    cone.scale.z=$("#conedepth").val();
+    renderer.render(scene, camera);
+});
+
+
+
 
 
 

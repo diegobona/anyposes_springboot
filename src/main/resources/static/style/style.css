@@ -269,7 +269,7 @@ select#modelswitch {
     border:none;
     box-sizing:border-box;
     padding:15px 30px;
-    background:#ededed;
+    /*background:#ededed;*/
     border-radius:15px;
     margin:0 15px;
     display:inline-block;

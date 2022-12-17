@@ -10,9 +10,12 @@
 	<!-- source：5118-下拉词—— -->
 	<meta name="description" content="本站是一款3D人体模型软件，提供人体动态绘画素材参考、速写人物临摹图，辅助素描入门等，交互式、可任意调整姿势">
 	<meta name="baidu-site-verification" content="code-5W8pPrtpKA" />
+	<meta name="baidu_union_verify" content="fc1f539ad4dbd59b020de7eecf6623f7">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.min.css" th:href="@{/dist/css/bootstrap.min.css}">
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 	<link rel="stylesheet" type="text/css" href="style/tooltip.css">
+
 	<link rel="shortcut icon" href="imgs/favicon/logo.png" type="image/x-icon">
 	<!--		<script src="js/libs/three.js"></script>-->
 	<script src="js/libs/three.min.js"></script>
@@ -27,6 +30,7 @@
 	<script src="js/libs/stats.min.js"></script>
 	<script src="js/libs/dat.gui.min.js"></script>
 
+
 <!--	<script src="js/libs/TrackballControls.js"></script>-->
 	<!--		<script src="js/libs/DragControls.js"></script>-->
 	<!--		<script src="js/libs/TransformControls.js"></script>-->
@@ -35,7 +39,19 @@
 	<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
 <!--	<script>LA.init({id: "JpjPs6ZP9EbA0AXy",ck: "JpjPs6ZP9EbA0AXy"})</script>-->
 	<script>LA.init({id: "JpjPs6ZP9EbA0AXy",ck: "JpjPs6ZP9EbA0AXy"})</script>
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?db2321c9e0fa447af0824281abb4ad7a";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+
 </head>
+
+
 
 
 
@@ -44,6 +60,59 @@
 <body th:replace="../static/base :: mybody">
 
 </body>
+
+<!--<input type="hidden" id="pickMemberModels" th:value="${memberType}" />-->
+<!--<h1 id="test222" th:text="${memberType}"></h1>-->
+<!--<h1 id="test333">123</h1>-->
+
+<!--<script th:src="@{/js/login_reg.js}"></script>-->
+
+<!--<script th:inline="javascript">-->
+<!--	var user = [[${session.user}]];-->
+
+<!--	// function checkLoginAndMember(){-->
+<!--	// 	//let memberType = $("#pickMemberModels").val();-->
+<!--	// 	let memberType=$("#test222").innerText;-->
+<!--	// 	//var memberTypeVal = eval("("+memberType+")");-->
+<!--	// 	let memberType2=[[${memberType}]];-->
+<!--	// 	console.log("后台返回的会员标识-方法1"+memberType);-->
+<!--	// 	console.log("后台返回的会员标识-方法2"+memberType2);-->
+<!--	// 	if(memberType==='yj'){-->
+<!--	// 		alert("is member!")-->
+<!--	// 		//下拉框选项enable（非置灰） //初始状态是disable-->
+<!--	// 	}-->
+<!--	// }-->
+
+<!--	let memberType;-->
+
+<!--	function  getMembertype(){-->
+<!--		//用户是否已登录-->
+<!--		if(user === '' || user === null || user===undefined){-->
+<!--			console.log("未登录！");-->
+<!--		} else{-->
+<!--			$.ajax({-->
+<!--				url: "/user/getMembertype",-->
+<!--				// data:,-->
+<!--				method:"post",-->
+<!--				success:function (result) {-->
+<!--					console.log("返回的data:"+result);-->
+<!--					memberType=result;-->
+<!--					return memberType;-->
+<!--				}-->
+<!--			})-->
+<!--		}-->
+<!--	}-->
+
+<!--	$("#modelswitch").click(function() {-->
+<!--		getMembertype();-->
+<!--		if(memberType==='yj'){-->
+<!--			console.log("the user is yj member");-->
+<!--			this.options[3].disabled=false;-->
+<!--		}-->
+<!--	});-->
+
+<!--</script>-->
+
 
 <!--		js的引入顺序不要乱动！有先后关系要求的，会出问题：-->
 <!--<script src="js/jquery.min.js"></script>-->

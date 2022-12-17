@@ -81,27 +81,27 @@ switch(options.text())
 	case "简洁风格-小孩":
 		var model=new Child();
 		break;
-	case "漫画风格-男(首次加载稍慢)":
+	case "漫画风格-男(会员专享|首次加载稍慢)":
 		var model=new Male();
 		animateMaleHeadReplace("js/libs/animatemale-head.stl");
 		maleTorsoReplace("js/libs/male-torso.stl");
 		break;
-	case "漫画风格-女(首次加载稍慢)":
+	case "漫画风格-女(会员专享|首次加载稍慢)":
 		var model=new Female();
 		animateFemaleHeadReplace("js/libs/animatefemale-head.stl");
 		femaleTorsoReplace("js/libs/female-torso.stl");
 		break;
-	case "真实风格-男(首次加载稍慢)":
+	case "真实风格-男(会员专享|首次加载稍慢)":
 		var model=new Male();
 		detailMaleHeadReplace("js/libs/detailmale-head.stl");
 		maleTorsoReplace("js/libs/male-torso.stl");
 		break;
-	case "真实风格-女(首次加载稍慢)":
+	case "真实风格-女(会员专享|首次加载稍慢)":
 		var model=new Female();
 		detailFemaleHeadReplace("js/libs/detailfemale-head.stl");
 		femaleTorsoReplace("js/libs/female-torso.stl");
 		break;
-	case "肌肉男(首次加载稍慢)":
+	case "肌肉男(会员专享|首次加载稍慢)":
 		var model=new Male();
 		detailMaleHeadReplace("js/libs/detailmale-head.stl");
 		jirounanTorsoReplace("js/libs/jirounan-torso.stl");

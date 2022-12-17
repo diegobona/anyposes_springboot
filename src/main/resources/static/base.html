@@ -10,7 +10,9 @@
     <!-- source：5118-下拉词—— -->
     <meta name="description" content="本站是一款3D人体模型软件，提供人体动态绘画素材参考、速写人物临摹图，辅助素描入门等，交互式、可任意调整姿势">
     <meta name="baidu-site-verification" content="code-5W8pPrtpKA" />
+    <meta name="baidu_union_verify" content="fc1f539ad4dbd59b020de7eecf6623f7">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="dist/css/bootstrap.min.css" th:href="@{/dist/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" href="style/style.css">
     <link rel="stylesheet" type="text/css" href="style/tooltip.css">
     <link rel="shortcut icon" href="imgs/favicon/logo.png" type="image/x-icon">
@@ -35,16 +37,43 @@
     <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
 <!--    <script>LA.init({id: "JpjPs6ZP9EbA0AXy",ck: "JpjPs6ZP9EbA0AXy"})</script>-->
     <script>LA.init({id: "JpjPs6ZP9EbA0AXy",ck: "JpjPs6ZP9EbA0AXy"})</script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?db2321c9e0fa447af0824281abb4ad7a";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
 </head>
 
 <!--首页的body的class不能设为page，否则影响对模型的操作，原因未知：-->
 <body th:fragment="mybody">
+
 <div class="header">
     <div class="menubar">
         <!--		<a href="https://www.anyposes.com"><img class="headerlogo" src="" alt="SetPose logo"></a>-->
-        <ul class="menutop">
+        <ul class="menutop" style="float:right">
             <li><a href="/">首页</a></li>
             <li><a href="poses/index.html">姿势介绍</a></li>
+
+            <li th:if="${session.user == null}" style="">
+                <a href="#" data-toggle="modal" data-target="#loginModal">登录</a>
+            </li>
+            <li th:if="${session.user != null} " style="" >
+                <a href="javascript:void(0)" id="currentUsername" th:text="${session.user.username}" >安全退出</a>
+            </li>
+            <li th:if="${session.user != null}" style="">
+                <a href="index.html" th:href="@{/user/logout}">安全退出</a>
+            </li>
+            <li th:if="${session.user == null}" style="">
+                <a href="#" data-toggle="modal" data-target="#register">注册</a>
+            </li>
+            <li style="">
+                <a href="#" data-toggle="modal" data-target="#member">会员计划</a>
+            </li>
         </ul>
         <!--		<div class="signinbutton">-->
         <!--			<div class="upgradebuttonwrap">-->
@@ -134,15 +163,16 @@
         <h2>设置</h2>
         <p>人物风格</p>
         <div>
-            <select id="modelswitch" name="人物风格" style="font-size: 16px">
+<!--            注意：如果更改下拉选项名称，posture-editor.js中对应也要改！！！-->
+            <select id="modelswitch" name="人物风格" style="font-size: 16px" >
                 <option value="male" selected = "selected">简洁风格-男</option>
                 <option value="female">简洁风格-女</option>
                 <option value="child">简洁风格-小孩</option>
-                <option value="animateMale">漫画风格-男(首次加载稍慢)</option>
-                <option value="animateFemale">漫画风格-女(首次加载稍慢)</option>
-                <option value="realMale">真实风格-男(首次加载稍慢)</option>
-                <option value="realFemale">真实风格-女(首次加载稍慢)</option>
-                <option value="StrongMan">肌肉男(首次加载稍慢)</option>
+                <option value="animateMale" disabled="disabled">漫画风格-男(会员专享|首次加载稍慢)</option>
+                <option value="animateFemale" disabled="disabled">漫画风格-女(会员专享|首次加载稍慢)</option>
+                <option value="realMale" disabled="disabled">真实风格-男(会员专享|首次加载稍慢)</option>
+                <option value="realFemale" disabled="disabled">真实风格-女(会员专享|首次加载稍慢)</option>
+                <option value="StrongMan" disabled="disabled">肌肉男(会员专享|首次加载稍慢)</option>
                 <option value="noHuman">无人</option>
 
                 <!-- <option disabled="">Detailed model 1 - (SetPose Pro)</option>
@@ -742,12 +772,16 @@
     </div>
 </div>
 
+<!-- 登录模态框（Modal） -->
+<!-- 注册modal end/.modal -->
+<div th:replace="../static/register_login_modal :: bookModal"></div>
 
 
     <!--		js的引入顺序不要乱动！有先后关系要求的，会出问题：-->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.lazy.min.js"></script>
     <script src="js/jquery.hotkeys.js"></script>
+    <script src="dist/js/bootstrap.js" th:src="@{/dist/js/bootstrap.js}"></script>
     <script src="js/bluebird.js"></script>
     <script src="js/html2canvas.min.js"></script>
     <script src="js/addAndRemoveProp.js"></script>
@@ -797,6 +831,94 @@
         });
 
     </script>
+
+
+<script th:src="@{/js/login_reg.js}"></script>
+
+<script th:inline="javascript">
+
+    var user = [[${session.user}]];
+
+    let memberType;
+
+    function  getMembertype(){
+        //用户是否已登录
+        // if(user === '' || user === null || user===undefined){
+        //     console.log("未登录！");
+        // } else{
+            $.ajax({
+                url: "/user/getMembertype",
+                method:"post",
+                success:function (result) {
+                    console.log("返回的data:"+result);
+                    memberType=result;
+                    if(memberType==='yj'){
+                        console.log("该用户是永久会员");
+                        //console.log($("#currentUsername")[0].innerHTML);
+                        $("#currentUsername")[0].innerHTML=user.username+"(永久会员)";
+                        // var value1=$("#modelswitch option[index='3']").text();
+                    }
+                }
+            })
+        // }
+    }
+
+    //1、这个click事件是包含了点击切换选项的？--因为切换选项时会执行选项disabled=false
+    //2、同时由于每次切换下拉选项时页面会刷新，所以会执行checkUserLogin-->执行getMembertype()-->重新发一次ajax请求，重新获取当前user的会员状态（根据consolelog也可看出）
+    //反正正好满足需求
+        $("#modelswitch").click(function(e) {
+            if(memberType==="yj"){
+                this.options[3].disabled=false;
+                this.options[4].disabled=false;
+                this.options[5].disabled=false;
+                this.options[6].disabled=false;
+                this.options[7].disabled=false;
+            }
+        });
+
+
+
+    //网上找的监听user变量变化，也不行：
+    // var loginUser = { "userArray": user };
+    //
+    // Object.defineProperty(loginUser,'userArray',{
+    //
+    //     get:function (userArray){
+    //         return userArray;
+    //     },
+    //     set:function (userArray){
+    //         console.log("change");
+    //     }
+    // });
+
+
+    // $("#loginForm>div.modal-footer > input").mouseup(function (e){
+    //     console.log("test");
+    // });
+
+
+
+
+    var myTimer=null;
+
+    var checkUserLogin= function () {
+        if (user != null) {
+            clearInterval(myTimer);
+            console.log(user);
+            getMembertype();
+
+        }else{
+            console.log(user);
+        }
+    };
+
+    $(document).ready(function (){
+        myTimer=setInterval(checkUserLogin, 2000);
+    });
+
+
+
+</script>
 
 
 </body>
